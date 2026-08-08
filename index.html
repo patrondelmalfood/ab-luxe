@@ -347,7 +347,9 @@
     }
 
     /* =========================================================
-       HERO
+       HERO / PORTADA PRINCIPAL
+       La imagen debe subirse a GitHub con este nombre exacto:
+       portada-ab-luxe.png
     ========================================================= */
 
     .hero{
@@ -358,26 +360,29 @@
       align-items:center;
       justify-content:flex-end;
       padding:60px 8%;
-      background:
-        linear-gradient(90deg,rgba(255,255,255,.08),rgba(0,0,0,.10)),
-        linear-gradient(135deg,#ded9d1 0%,#c8c1b8 48%,#b4aca2 100%);
+
+      /* FOTO LIMPIA A PANTALLA COMPLETA */
+      background-image:
+        linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 42%,rgba(0,0,0,.05) 100%),
+        url('portada-ab-luxe.png');
+      background-size:cover;
+      background-position:left center;
+      background-repeat:no-repeat;
     }
 
-    .hero::before{
-      content:"AQUÍ IRÁ TU FOTO PRINCIPAL / BANNER";
+    /* Sutil sombreado para que el texto siga siendo legible */
+    .hero::after{
+      content:"";
       position:absolute;
-      left:10%;
-      top:50%;
-      transform:translateY(-50%);
-      width:42%;
-      min-height:420px;
-      display:grid;
-      place-items:center;
-      border:1px dashed rgba(255,255,255,.55);
-      color:rgba(255,255,255,.72);
-      font-size:11px;
-      letter-spacing:2px;
-      text-align:center;
+      inset:0;
+      background:linear-gradient(
+        90deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 45%,
+        rgba(0,0,0,.06) 70%,
+        rgba(0,0,0,.12) 100%
+      );
+      pointer-events:none;
     }
 
     .hero-content{
@@ -386,6 +391,7 @@
       width:min(620px,48%);
       text-align:center;
       color:#fff;
+      text-shadow:0 2px 18px rgba(0,0,0,.18);
     }
 
     .hero-kicker{
@@ -918,21 +924,23 @@
 
       .hero{
         min-height:610px;
-        justify-content:center;
+        justify-content:flex-end;
         padding:55px 5%;
+        background-position:30% center;
       }
 
-      .hero::before{
-        left:5%;
-        width:90%;
-        min-height:300px;
-        top:24%;
-        transform:none;
+      .hero::after{
+        background:linear-gradient(
+          90deg,
+          rgba(0,0,0,0) 0%,
+          rgba(0,0,0,.02) 35%,
+          rgba(0,0,0,.25) 100%
+        );
       }
 
       .hero-content{
-        width:100%;
-        margin-top:210px;
+        width:52%;
+        margin-top:0;
       }
 
       .hero h1{
@@ -985,15 +993,25 @@
       }
 
       .hero{
-        min-height:560px;
+        min-height:590px;
+        align-items:flex-end;
+        justify-content:center;
+        padding:40px 20px 48px;
+        background-position:30% center;
       }
 
-      .hero::before{
-        min-height:270px;
+      .hero::after{
+        background:linear-gradient(
+          to bottom,
+          rgba(0,0,0,0) 35%,
+          rgba(0,0,0,.08) 55%,
+          rgba(0,0,0,.50) 100%
+        );
       }
 
       .hero-content{
-        margin-top:190px;
+        width:100%;
+        margin-top:0;
       }
 
       .hero h1{
