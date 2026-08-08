@@ -8,7 +8,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -27,6 +26,10 @@
       --gris:#777;
     }
 
+    html{
+      scroll-behavior:smooth;
+    }
+
     body{
       font-family:'Montserrat',sans-serif;
       background:#fff;
@@ -38,7 +41,13 @@
       text-decoration:none;
     }
 
-    /* BARRA SUPERIOR */
+    button{
+      font:inherit;
+    }
+
+    /* =========================
+       BARRA SUPERIOR
+    ========================= */
 
     .topbar{
       background:#111;
@@ -49,7 +58,9 @@
       padding:10px 15px;
     }
 
-    /* HEADER */
+    /* =========================
+       HEADER
+    ========================= */
 
     header{
       position:sticky;
@@ -72,6 +83,7 @@
       font-size:39px;
       letter-spacing:6px;
       font-weight:600;
+      white-space:nowrap;
     }
 
     .logo span{
@@ -88,13 +100,16 @@
     .icon{
       cursor:pointer;
       transition:.2s;
+      line-height:1;
     }
 
     .icon:hover{
       opacity:.5;
     }
 
-    /* MENU */
+    /* =========================
+       MENÚ PRINCIPAL
+    ========================= */
 
     nav{
       height:48px;
@@ -105,6 +120,11 @@
       font-size:12px;
       letter-spacing:1.2px;
       border-top:1px solid #f3f3f3;
+
+      /* IMPORTANTE:
+         el mega menú toma como referencia todo el NAV,
+         no solamente el botón CARTERAS */
+      position:relative;
     }
 
     .nav-item{
@@ -112,10 +132,22 @@
       display:flex;
       align-items:center;
       cursor:pointer;
-      position:relative;
+
+      /* IMPORTANTE:
+         no usar position:relative aquí,
+         porque encerraría el mega menú dentro de CARTERAS */
+      position:static;
     }
 
-    .nav-item:after{
+    .nav-label{
+      height:100%;
+      display:flex;
+      align-items:center;
+      position:relative;
+      white-space:nowrap;
+    }
+
+    .nav-label::after{
       content:"";
       position:absolute;
       bottom:0;
@@ -126,100 +158,94 @@
       transition:.3s;
     }
 
-    .nav-item:hover:after{
+    .nav-item:hover .nav-label::after{
       left:0;
       width:100%;
     }
 
-    /* MEGA MENU */
+    /* =========================
+       MEGA MENÚ
+    ========================= */
 
     .mega{
       position:absolute;
       left:0;
-      top:133px;
+      top:100%;
       width:100%;
-      background:white;
+      background:#fff;
       border-top:1px solid #eee;
-      box-shadow:0 15px 30px rgba(0,0,0,.08);
-
+      box-shadow:0 15px 30px rgba(0,0,0,.10);
       display:none;
-
-      padding:40px 7%;
-      grid-template-columns:
-        1fr 1fr 1.25fr 1.25fr;
-
+      padding:38px 6%;
+      grid-template-columns:1fr 1fr 1.3fr 1.3fr;
       gap:45px;
+      z-index:1500;
+      cursor:default;
     }
 
     .has-mega:hover .mega{
       display:grid;
     }
 
-    .mega h4{
+    .mega-column h4{
       font-size:11px;
       letter-spacing:1.4px;
       margin-bottom:18px;
+      color:#111;
     }
 
-    .mega ul{
+    .mega-column ul{
       list-style:none;
     }
 
-    .mega li{
+    .mega-column li{
       margin:12px 0;
       font-size:12px;
-      color:#444;
+      color:#555;
+      cursor:pointer;
+      transition:.2s;
+      line-height:1.45;
     }
 
-    .mega li:hover{
+    .mega-column li:hover{
       color:var(--dorado);
+      transform:translateX(2px);
     }
 
     .mega-photo{
-      background:linear-gradient(
-        135deg,
-        #eee8df,
-        #d5c6b4
-      );
-      height:210px;
+      background:linear-gradient(135deg,#eee8df,#d5c6b4);
+      min-height:220px;
       display:flex;
       align-items:center;
       justify-content:center;
       text-align:center;
       font-family:'Cormorant Garamond',serif;
-      font-size:19px;
+      font-size:20px;
       letter-spacing:2px;
       color:#555;
+      overflow:hidden;
     }
 
-    /* HERO */
+    /* =========================
+       HERO
+    ========================= */
 
     .hero{
-      height:680px;
-
+      min-height:680px;
       background:
-      linear-gradient(
-        rgba(0,0,0,.18),
-        rgba(0,0,0,.18)
-      ),
-      linear-gradient(
-        135deg,
-        #cfc5b7,
-        #eee8df,
-        #b7aa99
-      );
+        linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),
+        linear-gradient(135deg,#cfc5b7,#eee8df,#b7aa99);
 
       display:flex;
       justify-content:center;
       align-items:center;
-
       text-align:center;
       color:white;
       padding:20px;
     }
 
     .hero-content{
-      margin-top:100px;
+      margin-top:70px;
     }
 
     .hero-small{
@@ -249,14 +275,18 @@
       font-size:11px;
       letter-spacing:1.7px;
       transition:.3s;
+      border:1px solid transparent;
     }
 
     .btn:hover{
       background:#111;
       color:white;
+      border-color:#111;
     }
 
-    /* TITULOS */
+    /* =========================
+       SECCIONES
+    ========================= */
 
     .section{
       padding:80px 5%;
@@ -280,11 +310,13 @@
       letter-spacing:1.3px;
     }
 
-    /* PRODUCTOS */
+    /* =========================
+       PRODUCTOS
+    ========================= */
 
     .products{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+      grid-template-columns:repeat(4,minmax(0,1fr));
       gap:25px;
     }
 
@@ -297,11 +329,9 @@
       background:#f1eee9;
       position:relative;
       overflow:hidden;
-
       display:flex;
       justify-content:center;
       align-items:center;
-
       color:#999;
       font-size:12px;
       letter-spacing:1px;
@@ -317,6 +347,7 @@
       inset:0;
       background:rgba(255,255,255,0);
       transition:.4s;
+      pointer-events:none;
     }
 
     .product:hover .product-image::after{
@@ -366,29 +397,24 @@
       font-weight:500;
     }
 
-    /* CATEGORIAS */
+    /* =========================
+       CATEGORÍAS
+    ========================= */
 
     .categories{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
+      grid-template-columns:repeat(3,minmax(0,1fr));
       gap:20px;
     }
 
     .category{
       height:500px;
-      background:linear-gradient(
-        135deg,
-        #ddd5ca,
-        #b9ad9d
-      );
-
+      background:linear-gradient(135deg,#ddd5ca,#b9ad9d);
       display:flex;
       align-items:flex-end;
       justify-content:center;
-
       padding:35px;
       color:white;
-
       position:relative;
       overflow:hidden;
     }
@@ -402,6 +428,7 @@
       color:rgba(255,255,255,.75);
       letter-spacing:2px;
       font-size:11px;
+      white-space:nowrap;
     }
 
     .category-content{
@@ -425,7 +452,9 @@
       letter-spacing:1.5px;
     }
 
-    /* MARCAS */
+    /* =========================
+       MARCAS
+    ========================= */
 
     .brands{
       background:var(--crema);
@@ -448,28 +477,21 @@
       color:#333;
     }
 
-    /* BANNER */
+    /* =========================
+       BANNER
+    ========================= */
 
     .luxury-banner{
       min-height:450px;
       display:flex;
       justify-content:center;
       align-items:center;
-
       text-align:center;
-
       background:
-      linear-gradient(
-        rgba(0,0,0,.20),
-        rgba(0,0,0,.20)
-      ),
-      linear-gradient(
-        135deg,
-        #b8a997,
-        #ddd4c8
-      );
-
+        linear-gradient(rgba(0,0,0,.20),rgba(0,0,0,.20)),
+        linear-gradient(135deg,#b8a997,#ddd4c8);
       color:white;
+      padding:30px;
     }
 
     .luxury-banner h2{
@@ -484,7 +506,9 @@
       font-size:12px;
     }
 
-    /* FOOTER */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer{
       background:#111;
@@ -527,38 +551,42 @@
       font-size:10px;
     }
 
-    /* WHATSAPP */
+    /* =========================
+       WHATSAPP
+    ========================= */
 
     .whatsapp{
       position:fixed;
       right:22px;
       bottom:22px;
-
       width:58px;
       height:58px;
-
       border-radius:50%;
       background:#111;
-
       color:white;
-
       display:flex;
       align-items:center;
       justify-content:center;
-
       font-size:24px;
-
       box-shadow:0 5px 20px rgba(0,0,0,.25);
-
       z-index:999;
     }
 
-    /* MOVIL */
+    /* =========================
+       MENÚ MÓVIL
+    ========================= */
 
     .menu-mobile{
       display:none;
+      border:0;
+      background:transparent;
       font-size:23px;
       cursor:pointer;
+      color:#111;
+    }
+
+    .mobile-nav{
+      display:none;
     }
 
     @media(max-width:900px){
@@ -573,6 +601,7 @@
 
       .logo{
         font-size:30px;
+        letter-spacing:4px;
       }
 
       .menu-mobile{
@@ -583,8 +612,27 @@
         gap:13px;
       }
 
+      .mobile-nav{
+        display:none;
+        background:white;
+        border-top:1px solid #eee;
+        padding:15px 5% 25px;
+      }
+
+      .mobile-nav.active{
+        display:block;
+      }
+
+      .mobile-nav a{
+        display:block;
+        padding:14px 0;
+        border-bottom:1px solid #eee;
+        font-size:12px;
+        letter-spacing:1px;
+      }
+
       .hero{
-        height:600px;
+        min-height:600px;
       }
 
       .hero h1{
@@ -592,7 +640,7 @@
       }
 
       .products{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(2,minmax(0,1fr));
       }
 
       .product-image{
@@ -610,7 +658,6 @@
       .footer-grid{
         grid-template-columns:1fr 1fr;
       }
-
     }
 
     @media(max-width:500px){
@@ -619,8 +666,26 @@
         font-size:9px;
       }
 
+      .header-main{
+        padding:0 18px;
+      }
+
+      .logo{
+        font-size:27px;
+        letter-spacing:3px;
+      }
+
+      .icons{
+        gap:10px;
+        font-size:18px;
+      }
+
       .hero{
-        height:540px;
+        min-height:540px;
+      }
+
+      .hero-content{
+        margin-top:30px;
       }
 
       .hero h1{
@@ -650,387 +715,333 @@
       .footer-grid{
         grid-template-columns:1fr;
       }
-
     }
-
   </style>
 </head>
 
 <body>
 
-<div class="topbar">
-  ENVÍOS A TODO EL PERÚ · NOVEDADES SEMANALES · COMPRA SEGURA
-</div>
-
-<header>
-
-  <div class="header-main">
-
-    <div class="menu-mobile">☰</div>
-
-    <div class="logo">
-      AB <span>LUXE</span>
-    </div>
-
-    <div class="icons">
-      <span class="icon">⌕</span>
-      <span class="icon">♡</span>
-      <span class="icon">♙</span>
-      <span class="icon">🛍</span>
-    </div>
-
+  <div class="topbar">
+    ENVÍOS A TODO EL PERÚ · NOVEDADES SEMANALES · COMPRA SEGURA
   </div>
 
-  <nav>
+  <header>
 
-    <div class="nav-item">
-      NOVEDADES
+    <div class="header-main">
+
+      <button class="menu-mobile" id="menuMobile" aria-label="Abrir menú">
+        ☰
+      </button>
+
+      <div class="logo">
+        AB <span>LUXE</span>
+      </div>
+
+      <div class="icons">
+        <span class="icon" title="Buscar">⌕</span>
+        <span class="icon" title="Favoritos">♡</span>
+        <span class="icon" title="Mi cuenta">♙</span>
+        <span class="icon" title="Carrito">🛍</span>
+      </div>
+
     </div>
 
-    <div class="nav-item has-mega">
+    <nav>
 
-      CARTERAS
+      <div class="nav-item">
+        <span class="nav-label">NOVEDADES</span>
+      </div>
 
-      <div class="mega">
+      <div class="nav-item has-mega">
 
-        <div>
-          <h4>COMPRAR POR ESTILO</h4>
-          <ul>
-            <li>Crossbody</li>
-            <li>Tote Bags</li>
-            <li>Carteras de hombro</li>
-            <li>Mini Bags</li>
-            <li>Carteras de mano</li>
-            <li>Mochilas</li>
-            <li>Ver todas</li>
-          </ul>
+        <span class="nav-label">CARTERAS</span>
+
+        <div class="mega">
+
+          <div class="mega-column">
+            <h4>COMPRAR POR ESTILO</h4>
+            <ul>
+              <li>Crossbody</li>
+              <li>Tote Bags</li>
+              <li>Carteras de hombro</li>
+              <li>Mini Bags</li>
+              <li>Carteras de mano</li>
+              <li>Mochilas</li>
+              <li>Ver todas</li>
+            </ul>
+          </div>
+
+          <div class="mega-column">
+            <h4>COMPRAR POR MARCA</h4>
+            <ul>
+              <li>Guess</li>
+              <li>Michael Kors</li>
+              <li>Steve Madden</li>
+              <li>Tommy Hilfiger</li>
+              <li>Calvin Klein</li>
+              <li>Prada</li>
+              <li>BB</li>
+            </ul>
+          </div>
+
+          <div class="mega-photo">
+            FOTO COLECCIÓN
+          </div>
+
+          <div class="mega-photo">
+            FOTO NOVEDADES
+          </div>
+
         </div>
 
-        <div>
-          <h4>COMPRAR POR MARCA</h4>
-          <ul>
-            <li>Guess</li>
-            <li>Michael Kors</li>
-            <li>Steve Madden</li>
-            <li>Tommy Hilfiger</li>
-            <li>Calvin Klein</li>
-            <li>Prada</li>
-            <li>BB</li>
-          </ul>
-        </div>
-
-        <div class="mega-photo">
-          FOTO COLECCIÓN
-        </div>
-
-        <div class="mega-photo">
-          FOTO NOVEDADES
-        </div>
-
       </div>
 
-    </div>
-
-    <div class="nav-item">
-      BILLETERAS
-    </div>
-
-    <div class="nav-item">
-      CORREAS
-    </div>
-
-    <div class="nav-item">
-      ACCESORIOS
-    </div>
-
-    <div class="nav-item">
-      MARCAS
-    </div>
-
-    <div class="nav-item">
-      OFERTAS
-    </div>
-
-  </nav>
-
-</header>
-
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <div class="hero-small">
-      NUEVA COLECCIÓN
-    </div>
-
-    <h1>AB LUXE</h1>
-
-    <p>
-      Elegancia que te acompaña.
-    </p>
-
-    <a href="#novedades" class="btn">
-      DESCUBRIR COLECCIÓN
-    </a>
-
-  </div>
-
-</section>
-
-
-<section class="section" id="novedades">
-
-  <div class="section-title">
-    <h2>Nuevos Ingresos</h2>
-    <p>DESCUBRE LO ÚLTIMO EN AB LUXE</p>
-  </div>
-
-  <div class="products">
-
-    <div class="product">
-
-      <div class="product-image">
-
-        <span class="tag">NUEVO</span>
-
-        <span class="heart">♡</span>
-
+      <div class="nav-item">
+        <span class="nav-label">BILLETERAS</span>
       </div>
 
-      <div class="product-info">
-        <div class="brand">GUESS</div>
-        <div class="product-name">Nombre del producto</div>
-        <div class="price">S/ 0.00</div>
+      <div class="nav-item">
+        <span class="nav-label">CORREAS</span>
       </div>
 
+      <div class="nav-item">
+        <span class="nav-label">ACCESORIOS</span>
+      </div>
+
+      <div class="nav-item">
+        <span class="nav-label">MARCAS</span>
+      </div>
+
+      <div class="nav-item">
+        <span class="nav-label">OFERTAS</span>
+      </div>
+
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#novedades">NOVEDADES</a>
+      <a href="#">CARTERAS</a>
+      <a href="#">BILLETERAS</a>
+      <a href="#">CORREAS</a>
+      <a href="#">ACCESORIOS</a>
+      <a href="#">MARCAS</a>
+      <a href="#">OFERTAS</a>
     </div>
 
+  </header>
 
-    <div class="product">
+  <section class="hero">
 
-      <div class="product-image">
-        <span class="tag">NUEVO</span>
-        <span class="heart">♡</span>
+    <div class="hero-content">
+
+      <div class="hero-small">
+        NUEVA COLECCIÓN
       </div>
 
-      <div class="product-info">
-        <div class="brand">MICHAEL KORS</div>
-        <div class="product-name">Nombre del producto</div>
-        <div class="price">S/ 0.00</div>
-      </div>
-
-    </div>
-
-
-    <div class="product">
-
-      <div class="product-image">
-        <span class="tag">NUEVO</span>
-        <span class="heart">♡</span>
-      </div>
-
-      <div class="product-info">
-        <div class="brand">STEVE MADDEN</div>
-        <div class="product-name">Nombre del producto</div>
-        <div class="price">S/ 0.00</div>
-      </div>
-
-    </div>
-
-
-    <div class="product">
-
-      <div class="product-image">
-        <span class="tag">NUEVO</span>
-        <span class="heart">♡</span>
-      </div>
-
-      <div class="product-info">
-        <div class="brand">TOMMY HILFIGER</div>
-        <div class="product-name">Nombre del producto</div>
-        <div class="price">S/ 0.00</div>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="section">
-
-  <div class="section-title">
-    <h2>Compra por Categoría</h2>
-    <p>ENCUENTRA TU ESTILO</p>
-  </div>
-
-  <div class="categories">
-
-    <div class="category">
-
-      <div class="category-content">
-        <h3>Carteras</h3>
-        <a href="#">VER COLECCIÓN</a>
-      </div>
-
-    </div>
-
-
-    <div class="category">
-
-      <div class="category-content">
-        <h3>Billeteras</h3>
-        <a href="#">VER COLECCIÓN</a>
-      </div>
-
-    </div>
-
-
-    <div class="category">
-
-      <div class="category-content">
-        <h3>Accesorios</h3>
-        <a href="#">VER COLECCIÓN</a>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="brands">
-
-  <div class="section-title">
-
-    <h2>Shop by Brand</h2>
-
-    <p>
-      MARCAS SELECCIONADAS
-    </p>
-
-  </div>
-
-  <div class="brand-list">
-
-    <div class="brand-name">GUESS</div>
-
-    <div class="brand-name">MICHAEL KORS</div>
-
-    <div class="brand-name">TOMMY HILFIGER</div>
-
-    <div class="brand-name">CALVIN KLEIN</div>
-
-    <div class="brand-name">STEVE MADDEN</div>
-
-    <div class="brand-name">PRADA</div>
-
-    <div class="brand-name">BB</div>
-
-  </div>
-
-</section>
-
-
-<section class="luxury-banner">
-
-  <div>
-
-    <h2>Timeless Elegance</h2>
-
-    <p>
-      PIEZAS QUE COMPLEMENTAN TU ESTILO
-    </p>
-
-    <a class="btn" href="#">
-      EXPLORAR AB LUXE
-    </a>
-
-  </div>
-
-</section>
-
-
-<footer>
-
-  <div class="footer-grid">
-
-    <div>
-
-      <h3>AB LUXE</h3>
+      <h1>AB LUXE</h1>
 
       <p>
-        Bags · Wallets · Accessories
+        Elegancia que te acompaña.
       </p>
 
-      <p>
-        Una selección especial de accesorios
-        pensados para complementar tu estilo.
-      </p>
+      <a href="#novedades" class="btn">
+        DESCUBRIR COLECCIÓN
+      </a>
 
     </div>
 
+  </section>
+
+  <section class="section" id="novedades">
+
+    <div class="section-title">
+      <h2>Nuevos Ingresos</h2>
+      <p>DESCUBRE LO ÚLTIMO EN AB LUXE</p>
+    </div>
+
+    <div class="products">
+
+      <div class="product">
+        <div class="product-image">
+          <span class="tag">NUEVO</span>
+          <span class="heart">♡</span>
+        </div>
+        <div class="product-info">
+          <div class="brand">GUESS</div>
+          <div class="product-name">Nombre del producto</div>
+          <div class="price">S/ 0.00</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-image">
+          <span class="tag">NUEVO</span>
+          <span class="heart">♡</span>
+        </div>
+        <div class="product-info">
+          <div class="brand">MICHAEL KORS</div>
+          <div class="product-name">Nombre del producto</div>
+          <div class="price">S/ 0.00</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-image">
+          <span class="tag">NUEVO</span>
+          <span class="heart">♡</span>
+        </div>
+        <div class="product-info">
+          <div class="brand">STEVE MADDEN</div>
+          <div class="product-name">Nombre del producto</div>
+          <div class="price">S/ 0.00</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-image">
+          <span class="tag">NUEVO</span>
+          <span class="heart">♡</span>
+        </div>
+        <div class="product-info">
+          <div class="brand">TOMMY HILFIGER</div>
+          <div class="product-name">Nombre del producto</div>
+          <div class="price">S/ 0.00</div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>Compra por Categoría</h2>
+      <p>ENCUENTRA TU ESTILO</p>
+    </div>
+
+    <div class="categories">
+
+      <div class="category">
+        <div class="category-content">
+          <h3>Carteras</h3>
+          <a href="#">VER COLECCIÓN</a>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-content">
+          <h3>Billeteras</h3>
+          <a href="#">VER COLECCIÓN</a>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-content">
+          <h3>Accesorios</h3>
+          <a href="#">VER COLECCIÓN</a>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="brands">
+
+    <div class="section-title">
+      <h2>Shop by Brand</h2>
+      <p>MARCAS SELECCIONADAS</p>
+    </div>
+
+    <div class="brand-list">
+      <div class="brand-name">GUESS</div>
+      <div class="brand-name">MICHAEL KORS</div>
+      <div class="brand-name">TOMMY HILFIGER</div>
+      <div class="brand-name">CALVIN KLEIN</div>
+      <div class="brand-name">STEVE MADDEN</div>
+      <div class="brand-name">PRADA</div>
+      <div class="brand-name">BB</div>
+    </div>
+
+  </section>
+
+  <section class="luxury-banner">
 
     <div>
+      <h2>Timeless Elegance</h2>
+      <p>PIEZAS QUE COMPLEMENTAN TU ESTILO</p>
+      <a class="btn" href="#">
+        EXPLORAR AB LUXE
+      </a>
+    </div>
 
-      <h4>COMPRAR</h4>
+  </section>
 
-      <ul>
-        <li>Carteras</li>
-        <li>Billeteras</li>
-        <li>Correas</li>
-        <li>Accesorios</li>
-        <li>Novedades</li>
-      </ul>
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+        <h3>AB LUXE</h3>
+        <p>Bags · Wallets · Accessories</p>
+        <p>
+          Una selección especial de accesorios
+          pensados para complementar tu estilo.
+        </p>
+      </div>
+
+      <div>
+        <h4>COMPRAR</h4>
+        <ul>
+          <li>Carteras</li>
+          <li>Billeteras</li>
+          <li>Correas</li>
+          <li>Accesorios</li>
+          <li>Novedades</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>AYUDA</h4>
+        <ul>
+          <li>Envíos</li>
+          <li>Cambios</li>
+          <li>Preguntas frecuentes</li>
+          <li>Contacto</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>SÍGUENOS</h4>
+        <ul>
+          <li>Instagram</li>
+          <li>TikTok</li>
+          <li>Facebook</li>
+          <li>WhatsApp</li>
+        </ul>
+      </div>
 
     </div>
 
-
-    <div>
-
-      <h4>AYUDA</h4>
-
-      <ul>
-        <li>Envíos</li>
-        <li>Cambios</li>
-        <li>Preguntas frecuentes</li>
-        <li>Contacto</li>
-      </ul>
-
+    <div class="copyright">
+      © 2026 AB LUXE · TODOS LOS DERECHOS RESERVADOS
     </div>
 
+  </footer>
 
-    <div>
+  <a class="whatsapp" href="#" aria-label="WhatsApp">
+    ✆
+  </a>
 
-      <h4>SÍGUENOS</h4>
+  <script>
+    const menuMobile = document.getElementById('menuMobile');
+    const mobileNav = document.getElementById('mobileNav');
 
-      <ul>
-        <li>Instagram</li>
-        <li>TikTok</li>
-        <li>Facebook</li>
-        <li>WhatsApp</li>
-      </ul>
-
-    </div>
-
-  </div>
-
-  <div class="copyright">
-
-    © 2026 AB LUXE · TODOS LOS DERECHOS RESERVADOS
-
-  </div>
-
-</footer>
-
-
-<a class="whatsapp" href="#">
-  ✆
-</a>
-
+    menuMobile.addEventListener('click', () => {
+      mobileNav.classList.toggle('active');
+    });
+  </script>
 
 </body>
 </html>
