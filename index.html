@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>AB LUXE | Bags · Wallets · Accessories</title>
+  <meta name="description" content="AB LUXE - Carteras, billeteras, correas, calzado y accesorios premium para mujer y hombre.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,12 +19,15 @@
     }
 
     :root{
-      --negro:#111111;
-      --blanco:#ffffff;
-      --crema:#f7f4ef;
-      --beige:#e8dfd2;
-      --dorado:#b89a67;
-      --gris:#777;
+      --black:#111111;
+      --white:#ffffff;
+      --cream:#f7f4ef;
+      --sand:#e7ddd0;
+      --champagne:#b89a67;
+      --text:#222222;
+      --muted:#777777;
+      --line:#ece8e2;
+      --header-h:78px;
     }
 
     html{
@@ -32,8 +36,13 @@
 
     body{
       font-family:'Montserrat',sans-serif;
-      background:#fff;
-      color:var(--negro);
+      background:var(--white);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    body.menu-open{
+      overflow:hidden;
     }
 
     a{
@@ -42,156 +51,229 @@
     }
 
     button{
+      color:inherit;
       font:inherit;
     }
 
-    /* =========================
+    img{
+      display:block;
+      width:100%;
+    }
+
+    /* =========================================================
        BARRA SUPERIOR
-    ========================= */
+    ========================================================= */
 
     .topbar{
-      background:#111;
-      color:white;
+      background:var(--black);
+      color:#fff;
       text-align:center;
-      font-size:11px;
-      letter-spacing:1.5px;
+      font-size:10px;
+      letter-spacing:1.8px;
       padding:10px 15px;
+      text-transform:uppercase;
     }
 
-    /* =========================
+    /* =========================================================
        HEADER
-    ========================= */
+    ========================================================= */
 
-    header{
+    .site-header{
       position:sticky;
       top:0;
-      z-index:1000;
-      background:white;
-      border-bottom:1px solid #eee;
+      z-index:2000;
+      background:#fff;
+      border-bottom:1px solid var(--line);
     }
 
-    .header-main{
-      height:85px;
-      display:flex;
+    .header-inner{
+      height:var(--header-h);
+      max-width:1720px;
+      margin:0 auto;
+      padding:0 4%;
+      display:grid;
+      grid-template-columns:230px minmax(0,1fr) 230px;
       align-items:center;
-      justify-content:space-between;
-      padding:0 5%;
+      gap:20px;
     }
 
     .logo{
       font-family:'Cormorant Garamond',serif;
       font-size:39px;
-      letter-spacing:6px;
       font-weight:600;
+      letter-spacing:6px;
       white-space:nowrap;
-    }
-
-    .logo span{
-      color:var(--dorado);
-    }
-
-    .icons{
-      display:flex;
-      gap:22px;
-      font-size:20px;
-      align-items:center;
-    }
-
-    .icon{
-      cursor:pointer;
-      transition:.2s;
       line-height:1;
     }
 
-    .icon:hover{
-      opacity:.5;
+    .logo span{
+      color:var(--champagne);
     }
 
-    /* =========================
-       MENÚ PRINCIPAL
-    ========================= */
+    /* =========================================================
+       MENÚ DESKTOP
+    ========================================================= */
 
-    nav{
-      height:48px;
+    .desktop-nav{
+      height:100%;
       display:flex;
+      align-items:stretch;
       justify-content:center;
-      align-items:center;
-      gap:37px;
-      font-size:12px;
-      letter-spacing:1.2px;
-      border-top:1px solid #f3f3f3;
-
-      /* IMPORTANTE:
-         el mega menú toma como referencia todo el NAV,
-         no solamente el botón CARTERAS */
-      position:relative;
+      gap:30px;
     }
 
     .nav-item{
+      position:static;
       height:100%;
       display:flex;
       align-items:center;
-      cursor:pointer;
-
-      /* IMPORTANTE:
-         no usar position:relative aquí,
-         porque encerraría el mega menú dentro de CARTERAS */
-      position:static;
     }
 
-    .nav-label{
+    .nav-trigger,
+    .nav-link{
+      position:relative;
       height:100%;
       display:flex;
       align-items:center;
-      position:relative;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:1px;
       white-space:nowrap;
     }
 
-    .nav-label::after{
+    .nav-trigger::after,
+    .nav-link::after{
       content:"";
       position:absolute;
-      bottom:0;
       left:50%;
+      bottom:0;
       width:0;
       height:1px;
       background:#111;
-      transition:.3s;
+      transition:.25s ease;
     }
 
-    .nav-item:hover .nav-label::after{
+    .nav-item:hover > .nav-trigger::after,
+    .nav-link:hover::after{
       left:0;
       width:100%;
     }
 
-    /* =========================
-       MEGA MENÚ
-    ========================= */
+    .sale-link{
+      color:#a11212;
+    }
 
-    .mega{
+    /* =========================================================
+       ICONOS
+    ========================================================= */
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:17px;
+    }
+
+    .icon-btn{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      background:transparent;
+      border:0;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .icon-btn:hover{
+      opacity:.55;
+    }
+
+    .icon-btn svg{
+      width:20px;
+      height:20px;
+      stroke:#111;
+      fill:none;
+      stroke-width:1.6;
+    }
+
+    .bag-wrap{
+      position:relative;
+    }
+
+    .cart-count{
+      position:absolute;
+      right:-2px;
+      top:-2px;
+      min-width:16px;
+      height:16px;
+      padding:0 4px;
+      border-radius:20px;
+      background:#111;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:8px;
+      line-height:1;
+    }
+
+    /* =========================================================
+       MEGA MENÚ
+       IMPORTANTE: todos ocupan TODO el ancho del header
+    ========================================================= */
+
+    .mega-menu{
       position:absolute;
       left:0;
       top:100%;
       width:100%;
       background:#fff;
-      border-top:1px solid #eee;
-      box-shadow:0 15px 30px rgba(0,0,0,.10);
-      display:none;
-      padding:38px 6%;
-      grid-template-columns:1fr 1fr 1.3fr 1.3fr;
-      gap:45px;
-      z-index:1500;
-      cursor:default;
+      border-top:1px solid var(--line);
+      box-shadow:0 18px 35px rgba(0,0,0,.10);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transform:translateY(-5px);
+      transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
+      z-index:2100;
+      max-height:calc(100vh - var(--header-h));
+      overflow:auto;
     }
 
-    .has-mega:hover .mega{
+    .nav-item.has-mega:hover > .mega-menu,
+    .nav-item.has-mega:focus-within > .mega-menu{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
+    .mega-inner{
+      max-width:1500px;
+      margin:0 auto;
+      padding:32px 4% 36px;
       display:grid;
+      grid-template-columns:220px 220px minmax(0,1fr);
+      gap:42px;
+      align-items:start;
+    }
+
+    .mega-column{
+      min-height:310px;
+      padding-right:20px;
+      border-right:1px solid #eee;
     }
 
     .mega-column h4{
+      margin-bottom:17px;
       font-size:11px;
-      letter-spacing:1.4px;
-      margin-bottom:18px;
-      color:#111;
+      font-weight:600;
+      letter-spacing:.8px;
+      text-transform:uppercase;
     }
 
     .mega-column ul{
@@ -199,460 +281,674 @@
     }
 
     .mega-column li{
-      margin:12px 0;
-      font-size:12px;
-      color:#555;
-      cursor:pointer;
-      transition:.2s;
+      margin:0 0 12px;
+    }
+
+    .mega-column a{
+      font-size:11px;
       line-height:1.45;
+      color:#333;
+      transition:.2s;
     }
 
-    .mega-column li:hover{
-      color:var(--dorado);
-      transform:translateX(2px);
+    .mega-column a:hover{
+      color:var(--champagne);
     }
 
-    .mega-photo{
-      background:linear-gradient(135deg,#eee8df,#d5c6b4);
-      min-height:220px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      font-family:'Cormorant Garamond',serif;
-      font-size:20px;
-      letter-spacing:2px;
-      color:#555;
+    .view-all{
+      display:inline-block;
+      margin-top:3px;
+      border-bottom:1px solid #222;
+      padding-bottom:2px;
+      font-weight:500;
+    }
+
+    .mega-visuals{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .mega-card{
+      min-height:205px;
+      position:relative;
       overflow:hidden;
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.25),rgba(0,0,0,.03)),
+        linear-gradient(135deg,#efe7dc,#d7c8b5);
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding:20px;
+      text-align:center;
+      cursor:pointer;
     }
 
-    /* =========================
+    .mega-card::before{
+      content:"SUBIR FOTO";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      color:rgba(70,60,50,.52);
+      font-size:10px;
+      letter-spacing:2px;
+    }
+
+    .mega-card-title{
+      position:relative;
+      z-index:2;
+      background:rgba(255,255,255,.92);
+      padding:9px 15px;
+      min-width:125px;
+      font-size:10px;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+    }
+
+    /* =========================================================
        HERO
-    ========================= */
+    ========================================================= */
 
     .hero{
-      min-height:680px;
-      background:
-        linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),
-        linear-gradient(135deg,#cfc5b7,#eee8df,#b7aa99);
-
+      min-height:690px;
+      position:relative;
+      overflow:hidden;
       display:flex;
-      justify-content:center;
       align-items:center;
+      justify-content:flex-end;
+      padding:60px 8%;
+      background:
+        linear-gradient(90deg,rgba(255,255,255,.08),rgba(0,0,0,.10)),
+        linear-gradient(135deg,#ded9d1 0%,#c8c1b8 48%,#b4aca2 100%);
+    }
+
+    .hero::before{
+      content:"AQUÍ IRÁ TU FOTO PRINCIPAL / BANNER";
+      position:absolute;
+      left:10%;
+      top:50%;
+      transform:translateY(-50%);
+      width:42%;
+      min-height:420px;
+      display:grid;
+      place-items:center;
+      border:1px dashed rgba(255,255,255,.55);
+      color:rgba(255,255,255,.72);
+      font-size:11px;
+      letter-spacing:2px;
       text-align:center;
-      color:white;
-      padding:20px;
     }
 
     .hero-content{
-      margin-top:70px;
+      position:relative;
+      z-index:2;
+      width:min(620px,48%);
+      text-align:center;
+      color:#fff;
     }
 
-    .hero-small{
-      letter-spacing:4px;
-      font-size:12px;
+    .hero-kicker{
       margin-bottom:15px;
+      font-size:11px;
+      letter-spacing:4px;
     }
 
     .hero h1{
       font-family:'Cormorant Garamond',serif;
-      font-size:72px;
+      font-size:82px;
       font-weight:500;
-      letter-spacing:5px;
+      letter-spacing:6px;
+      line-height:.95;
     }
 
     .hero p{
+      margin:22px 0 30px;
       font-family:'Cormorant Garamond',serif;
-      font-size:23px;
-      margin:10px 0 30px;
+      font-size:25px;
     }
 
     .btn{
-      display:inline-block;
-      background:white;
-      color:#111;
-      padding:15px 32px;
-      font-size:11px;
-      letter-spacing:1.7px;
-      transition:.3s;
-      border:1px solid transparent;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 29px;
+      border:1px solid #111;
+      background:#111;
+      color:#fff;
+      font-size:10px;
+      font-weight:500;
+      letter-spacing:1.5px;
+      transition:.25s ease;
     }
 
     .btn:hover{
-      background:#111;
-      color:white;
-      border-color:#111;
+      background:#fff;
+      color:#111;
     }
 
-    /* =========================
-       SECCIONES
-    ========================= */
+    .btn-light{
+      border-color:#fff;
+      background:#fff;
+      color:#111;
+    }
+
+    .btn-light:hover{
+      background:#111;
+      border-color:#111;
+      color:#fff;
+    }
+
+    /* =========================================================
+       SECCIONES GENERALES
+    ========================================================= */
 
     .section{
-      padding:80px 5%;
+      padding:82px 5%;
     }
 
-    .section-title{
+    .section-inner{
+      max-width:1500px;
+      margin:0 auto;
+    }
+
+    .section-heading{
       text-align:center;
-      margin-bottom:45px;
+      margin-bottom:42px;
     }
 
-    .section-title h2{
+    .section-heading h2{
       font-family:'Cormorant Garamond',serif;
-      font-size:42px;
+      font-size:45px;
+      font-weight:500;
+      line-height:1.1;
+    }
+
+    .section-heading p{
+      margin-top:10px;
+      color:#777;
+      font-size:10px;
+      letter-spacing:1.8px;
+    }
+
+    /* =========================================================
+       SHOP BY DEPARTMENT
+    ========================================================= */
+
+    .departments{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .department-card{
+      position:relative;
+      height:470px;
+      overflow:hidden;
+      background:linear-gradient(135deg,#e6ded3,#c8baa9);
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding:28px;
+      color:#fff;
+    }
+
+    .department-card::before{
+      content:"SUBIR FOTO";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      color:rgba(255,255,255,.75);
+      font-size:10px;
+      letter-spacing:2px;
+    }
+
+    .department-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,.42),transparent 48%);
+    }
+
+    .department-content{
+      position:relative;
+      z-index:2;
+      text-align:center;
+    }
+
+    .department-content h3{
+      font-family:'Cormorant Garamond',serif;
+      font-size:34px;
       font-weight:500;
     }
 
-    .section-title p{
-      margin-top:9px;
-      color:#777;
-      font-size:12px;
-      letter-spacing:1.3px;
+    .department-content a{
+      display:inline-block;
+      margin-top:12px;
+      padding-bottom:4px;
+      border-bottom:1px solid #fff;
+      font-size:9px;
+      letter-spacing:1.5px;
     }
 
-    /* =========================
+    /* =========================================================
        PRODUCTOS
-    ========================= */
+    ========================================================= */
 
     .products{
       display:grid;
       grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:25px;
+      gap:24px;
     }
 
-    .product{
+    .product-card{
       cursor:pointer;
     }
 
     .product-image{
-      height:390px;
-      background:#f1eee9;
+      aspect-ratio:4/5;
       position:relative;
       overflow:hidden;
-      display:flex;
-      justify-content:center;
-      align-items:center;
+      background:#f1eee9;
+      display:grid;
+      place-items:center;
       color:#999;
-      font-size:12px;
-      letter-spacing:1px;
+      font-size:10px;
+      letter-spacing:1.5px;
     }
 
     .product-image::before{
       content:"FOTO DEL PRODUCTO";
     }
 
-    .product-image::after{
-      content:"";
+    .product-tag{
       position:absolute;
-      inset:0;
-      background:rgba(255,255,255,0);
-      transition:.4s;
-      pointer-events:none;
-    }
-
-    .product:hover .product-image::after{
-      background:rgba(255,255,255,.15);
-    }
-
-    .heart{
-      position:absolute;
-      right:15px;
-      top:15px;
-      z-index:10;
-      font-size:21px;
-      color:#333;
-    }
-
-    .tag{
-      position:absolute;
-      left:12px;
       top:12px;
+      left:12px;
+      z-index:3;
       background:#111;
-      color:white;
-      padding:6px 10px;
-      font-size:9px;
+      color:#fff;
+      padding:7px 10px;
+      font-size:8px;
       letter-spacing:1px;
-      z-index:10;
+    }
+
+    .product-heart{
+      position:absolute;
+      top:12px;
+      right:12px;
+      z-index:3;
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      background:rgba(255,255,255,.92);
+      display:grid;
+      place-items:center;
+      font-size:18px;
     }
 
     .product-info{
-      padding:17px 2px;
       text-align:center;
+      padding:16px 4px 0;
     }
 
-    .brand{
-      font-size:10px;
-      letter-spacing:1.7px;
+    .product-brand{
       color:#777;
+      font-size:9px;
+      letter-spacing:1.7px;
     }
 
     .product-name{
+      margin:7px 0 8px;
       font-family:'Cormorant Garamond',serif;
       font-size:20px;
-      margin:7px 0;
     }
 
-    .price{
-      font-size:13px;
+    .product-price{
+      font-size:12px;
       font-weight:500;
     }
 
-    /* =========================
-       CATEGORÍAS
-    ========================= */
-
-    .categories{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:20px;
-    }
-
-    .category{
-      height:500px;
-      background:linear-gradient(135deg,#ddd5ca,#b9ad9d);
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      padding:35px;
-      color:white;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .category::before{
-      content:"AGREGAR FOTO";
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      color:rgba(255,255,255,.75);
-      letter-spacing:2px;
-      font-size:11px;
-      white-space:nowrap;
-    }
-
-    .category-content{
-      position:relative;
-      text-align:center;
-      z-index:2;
-    }
-
-    .category h3{
-      font-family:'Cormorant Garamond',serif;
-      font-size:38px;
-      font-weight:500;
-    }
-
-    .category a{
-      display:inline-block;
-      margin-top:12px;
-      font-size:10px;
-      border-bottom:1px solid white;
-      padding-bottom:4px;
-      letter-spacing:1.5px;
-    }
-
-    /* =========================
+    /* =========================================================
        MARCAS
-    ========================= */
+    ========================================================= */
 
-    .brands{
-      background:var(--crema);
-      padding:70px 5%;
+    .brands-section{
+      background:var(--cream);
+      padding:68px 5%;
       text-align:center;
     }
 
     .brand-list{
+      max-width:1400px;
+      margin:35px auto 0;
       display:flex;
       justify-content:center;
       align-items:center;
       flex-wrap:wrap;
-      gap:45px;
-      margin-top:40px;
+      gap:28px 48px;
     }
 
     .brand-name{
       font-family:'Cormorant Garamond',serif;
-      font-size:24px;
+      font-size:25px;
       color:#333;
     }
 
-    /* =========================
-       BANNER
-    ========================= */
+    /* =========================================================
+       BANNER SECUNDARIO
+    ========================================================= */
 
-    .luxury-banner{
-      min-height:450px;
+    .editorial-banner{
+      min-height:470px;
       display:flex;
-      justify-content:center;
       align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
       text-align:center;
+      color:#fff;
+      padding:50px 25px;
       background:
-        linear-gradient(rgba(0,0,0,.20),rgba(0,0,0,.20)),
+        linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),
         linear-gradient(135deg,#b8a997,#ddd4c8);
-      color:white;
-      padding:30px;
     }
 
-    .luxury-banner h2{
-      font-family:'Cormorant Garamond',serif;
-      font-size:55px;
+    .editorial-banner::before{
+      content:"ESPACIO PARA FOTO EDITORIAL";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      color:rgba(255,255,255,.55);
+      font-size:10px;
       letter-spacing:2px;
     }
 
-    .luxury-banner p{
-      margin:12px 0 25px;
-      letter-spacing:1.5px;
-      font-size:12px;
+    .editorial-content{
+      position:relative;
+      z-index:2;
     }
 
-    /* =========================
+    .editorial-content h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:58px;
+      font-weight:500;
+    }
+
+    .editorial-content p{
+      margin:12px 0 25px;
+      font-size:10px;
+      letter-spacing:2px;
+    }
+
+    /* =========================================================
        FOOTER
-    ========================= */
+    ========================================================= */
 
     footer{
       background:#111;
-      color:white;
-      padding:65px 6% 30px;
+      color:#fff;
+      padding:65px 6% 28px;
     }
 
     .footer-grid{
+      max-width:1500px;
+      margin:0 auto;
       display:grid;
       grid-template-columns:2fr 1fr 1fr 1fr;
       gap:50px;
     }
 
     footer h3{
+      margin-bottom:8px;
       font-family:'Cormorant Garamond',serif;
-      font-size:31px;
+      font-size:34px;
       letter-spacing:4px;
     }
 
     footer h4{
-      font-size:11px;
+      margin-bottom:18px;
+      font-size:10px;
       letter-spacing:1.5px;
-      margin-bottom:20px;
     }
 
     footer p,
-    footer li{
+    footer li,
+    footer a{
       color:#aaa;
-      font-size:11px;
+      font-size:10px;
       line-height:2;
       list-style:none;
     }
 
-    .copyright{
-      margin-top:50px;
-      padding-top:20px;
-      border-top:1px solid #333;
-      text-align:center;
-      color:#777;
-      font-size:10px;
+    footer a:hover{
+      color:#fff;
     }
 
-    /* =========================
+    .copyright{
+      max-width:1500px;
+      margin:45px auto 0;
+      padding-top:20px;
+      border-top:1px solid #303030;
+      text-align:center;
+      color:#777;
+      font-size:9px;
+      letter-spacing:1px;
+    }
+
+    /* =========================================================
        WHATSAPP
-    ========================= */
+    ========================================================= */
 
     .whatsapp{
       position:fixed;
-      right:22px;
-      bottom:22px;
-      width:58px;
-      height:58px;
+      right:24px;
+      bottom:24px;
+      z-index:1600;
+      width:56px;
+      height:56px;
+      display:grid;
+      place-items:center;
       border-radius:50%;
       background:#111;
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px;
-      box-shadow:0 5px 20px rgba(0,0,0,.25);
-      z-index:999;
+      color:#fff;
+      box-shadow:0 8px 25px rgba(0,0,0,.22);
+      font-size:23px;
     }
 
-    /* =========================
-       MENÚ MÓVIL
-    ========================= */
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
 
-    .menu-mobile{
+    .mobile-menu-btn{
       display:none;
+      width:36px;
+      height:36px;
       border:0;
       background:transparent;
-      font-size:23px;
       cursor:pointer;
-      color:#111;
+      font-size:23px;
     }
 
-    .mobile-nav{
+    .mobile-drawer{
+      position:fixed;
+      inset:0;
+      z-index:3000;
+      background:rgba(0,0,0,.36);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:.25s;
+    }
+
+    .mobile-drawer.active{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+
+    .drawer-panel{
+      width:min(88vw,390px);
+      height:100%;
+      background:#fff;
+      padding:22px;
+      overflow:auto;
+      transform:translateX(-100%);
+      transition:.25s;
+    }
+
+    .mobile-drawer.active .drawer-panel{
+      transform:translateX(0);
+    }
+
+    .drawer-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding-bottom:18px;
+      border-bottom:1px solid #eee;
+    }
+
+    .drawer-logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:27px;
+      letter-spacing:4px;
+    }
+
+    .drawer-close{
+      border:0;
+      background:transparent;
+      font-size:26px;
+      cursor:pointer;
+    }
+
+    .mobile-nav-list{
+      list-style:none;
+      padding-top:10px;
+    }
+
+    .mobile-nav-list > li{
+      border-bottom:1px solid #eee;
+    }
+
+    .mobile-nav-list a,
+    .mobile-nav-list summary{
+      display:block;
+      padding:16px 2px;
+      font-size:11px;
+      letter-spacing:1px;
+      cursor:pointer;
+      list-style:none;
+    }
+
+    .mobile-nav-list summary::-webkit-details-marker{
       display:none;
     }
 
-    @media(max-width:900px){
+    .mobile-submenu{
+      padding:0 0 15px 15px;
+    }
 
-      nav{
+    .mobile-submenu a{
+      padding:8px 0;
+      color:#666;
+      font-size:10px;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media(max-width:1180px){
+      .header-inner{
+        grid-template-columns:195px minmax(0,1fr) 175px;
+        gap:14px;
+        padding:0 3%;
+      }
+
+      .desktop-nav{
+        gap:18px;
+      }
+
+      .nav-trigger,
+      .nav-link{
+        font-size:10px;
+      }
+
+      .mega-inner{
+        grid-template-columns:185px 185px minmax(0,1fr);
+        gap:28px;
+      }
+    }
+
+    @media(max-width:980px){
+      :root{
+        --header-h:70px;
+      }
+
+      .header-inner{
+        grid-template-columns:44px 1fr 145px;
+      }
+
+      .desktop-nav{
         display:none;
       }
 
-      .header-main{
-        height:72px;
+      .mobile-menu-btn{
+        display:grid;
+        place-items:center;
       }
 
       .logo{
-        font-size:30px;
+        justify-self:center;
+        font-size:31px;
         letter-spacing:4px;
       }
 
-      .menu-mobile{
-        display:block;
+      .header-actions{
+        gap:8px;
       }
 
-      .icons{
-        gap:13px;
-      }
-
-      .mobile-nav{
+      .header-actions .hide-tablet{
         display:none;
-        background:white;
-        border-top:1px solid #eee;
-        padding:15px 5% 25px;
-      }
-
-      .mobile-nav.active{
-        display:block;
-      }
-
-      .mobile-nav a{
-        display:block;
-        padding:14px 0;
-        border-bottom:1px solid #eee;
-        font-size:12px;
-        letter-spacing:1px;
       }
 
       .hero{
-        min-height:600px;
+        min-height:610px;
+        justify-content:center;
+        padding:55px 5%;
+      }
+
+      .hero::before{
+        left:5%;
+        width:90%;
+        min-height:300px;
+        top:24%;
+        transform:none;
+      }
+
+      .hero-content{
+        width:100%;
+        margin-top:210px;
       }
 
       .hero h1{
-        font-size:53px;
+        font-size:61px;
+      }
+
+      .departments{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
+      .department-card{
+        height:410px;
       }
 
       .products{
         grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-
-      .product-image{
-        height:280px;
-      }
-
-      .categories{
-        grid-template-columns:1fr;
-      }
-
-      .category{
-        height:420px;
       }
 
       .footer-grid{
@@ -660,14 +956,15 @@
       }
     }
 
-    @media(max-width:500px){
-
+    @media(max-width:560px){
       .topbar{
-        font-size:9px;
+        font-size:8px;
+        letter-spacing:1.2px;
       }
 
-      .header-main{
-        padding:0 18px;
+      .header-inner{
+        padding:0 12px;
+        grid-template-columns:38px 1fr 106px;
       }
 
       .logo{
@@ -675,45 +972,84 @@
         letter-spacing:3px;
       }
 
-      .icons{
-        gap:10px;
-        font-size:18px;
+      .header-actions{
+        gap:2px;
+      }
+
+      .icon-btn{
+        width:32px;
+      }
+
+      .header-actions .hide-mobile{
+        display:none;
       }
 
       .hero{
-        min-height:540px;
+        min-height:560px;
+      }
+
+      .hero::before{
+        min-height:270px;
       }
 
       .hero-content{
-        margin-top:30px;
+        margin-top:190px;
       }
 
       .hero h1{
-        font-size:44px;
+        font-size:46px;
+        letter-spacing:4px;
       }
 
       .hero p{
-        font-size:19px;
+        font-size:20px;
       }
 
       .section{
-        padding:60px 18px;
+        padding:62px 16px;
+      }
+
+      .section-heading h2{
+        font-size:37px;
+      }
+
+      .departments{
+        grid-template-columns:1fr;
+      }
+
+      .department-card{
+        height:420px;
       }
 
       .products{
         gap:12px;
       }
 
-      .product-image{
-        height:230px;
-      }
-
       .product-name{
         font-size:17px;
       }
 
+      .brand-list{
+        gap:20px 28px;
+      }
+
+      .brand-name{
+        font-size:21px;
+      }
+
+      .editorial-content h2{
+        font-size:43px;
+      }
+
       .footer-grid{
         grid-template-columns:1fr;
+      }
+
+      .whatsapp{
+        width:52px;
+        height:52px;
+        right:16px;
+        bottom:16px;
       }
     }
   </style>
@@ -725,258 +1061,489 @@
     ENVÍOS A TODO EL PERÚ · NOVEDADES SEMANALES · COMPRA SEGURA
   </div>
 
-  <header>
+  <header class="site-header">
 
-    <div class="header-main">
+    <div class="header-inner">
 
-      <button class="menu-mobile" id="menuMobile" aria-label="Abrir menú">
-        ☰
-      </button>
+      <button class="mobile-menu-btn" id="openMenu" aria-label="Abrir menú">☰</button>
 
-      <div class="logo">
+      <a class="logo" href="#">
         AB <span>LUXE</span>
-      </div>
+      </a>
 
-      <div class="icons">
-        <span class="icon" title="Buscar">⌕</span>
-        <span class="icon" title="Favoritos">♡</span>
-        <span class="icon" title="Mi cuenta">♙</span>
-        <span class="icon" title="Carrito">🛍</span>
-      </div>
+      <nav class="desktop-nav" aria-label="Navegación principal">
 
-    </div>
-
-    <nav>
-
-      <div class="nav-item">
-        <span class="nav-label">NOVEDADES</span>
-      </div>
-
-      <div class="nav-item has-mega">
-
-        <span class="nav-label">CARTERAS</span>
-
-        <div class="mega">
-
-          <div class="mega-column">
-            <h4>COMPRAR POR ESTILO</h4>
-            <ul>
-              <li>Crossbody</li>
-              <li>Tote Bags</li>
-              <li>Carteras de hombro</li>
-              <li>Mini Bags</li>
-              <li>Carteras de mano</li>
-              <li>Mochilas</li>
-              <li>Ver todas</li>
-            </ul>
-          </div>
-
-          <div class="mega-column">
-            <h4>COMPRAR POR MARCA</h4>
-            <ul>
-              <li>Guess</li>
-              <li>Michael Kors</li>
-              <li>Steve Madden</li>
-              <li>Tommy Hilfiger</li>
-              <li>Calvin Klein</li>
-              <li>Prada</li>
-              <li>BB</li>
-            </ul>
-          </div>
-
-          <div class="mega-photo">
-            FOTO COLECCIÓN
-          </div>
-
-          <div class="mega-photo">
-            FOTO NOVEDADES
-          </div>
-
+        <div class="nav-item">
+          <a class="nav-link" href="#novedades">NOVEDADES</a>
         </div>
 
+        <!-- ===================== MUJER ===================== -->
+        <div class="nav-item has-mega">
+          <button class="nav-trigger" type="button">MUJER</button>
+
+          <div class="mega-menu">
+            <div class="mega-inner">
+
+              <div class="mega-column">
+                <h4>Bolsos & Accesorios</h4>
+                <ul>
+                  <li><a href="#">Carteras</a></li>
+                  <li><a href="#">Billeteras</a></li>
+                  <li><a href="#">Crossbody</a></li>
+                  <li><a href="#">Mini bags</a></li>
+                  <li><a href="#">Correas</a></li>
+                  <li><a href="#">Lentes</a></li>
+                  <li><a href="#">Accesorios</a></li>
+                  <li><a class="view-all" href="#">Ver todo Mujer</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-column">
+                <h4>Destacados</h4>
+                <ul>
+                  <li><a href="#">Nuevos ingresos</a></li>
+                  <li><a href="#">Best sellers</a></li>
+                  <li><a href="#">Regalos para ella</a></li>
+                  <li><a href="#">Calzado mujer</a></li>
+                  <li><a href="#">Ofertas</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-visuals">
+                <a class="mega-card" href="#"><span class="mega-card-title">New Arrivals</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Carteras</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Billeteras</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Calzado</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== HOMBRE ===================== -->
+        <div class="nav-item has-mega">
+          <button class="nav-trigger" type="button">HOMBRE</button>
+
+          <div class="mega-menu">
+            <div class="mega-inner">
+
+              <div class="mega-column">
+                <h4>Accesorios</h4>
+                <ul>
+                  <li><a href="#">Billeteras</a></li>
+                  <li><a href="#">Correas</a></li>
+                  <li><a href="#">Bolsos</a></li>
+                  <li><a href="#">Mochilas</a></li>
+                  <li><a href="#">Lentes</a></li>
+                  <li><a href="#">Llaveros</a></li>
+                  <li><a class="view-all" href="#">Ver todo Hombre</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-column">
+                <h4>Destacados</h4>
+                <ul>
+                  <li><a href="#">Nuevos ingresos</a></li>
+                  <li><a href="#">Best sellers</a></li>
+                  <li><a href="#">Regalos para él</a></li>
+                  <li><a href="#">Calzado hombre</a></li>
+                  <li><a href="#">Ofertas</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-visuals">
+                <a class="mega-card" href="#"><span class="mega-card-title">Billeteras</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Correas</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Bolsos</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Calzado</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== CARTERAS ===================== -->
+        <div class="nav-item has-mega">
+          <button class="nav-trigger" type="button">CARTERAS</button>
+
+          <div class="mega-menu">
+            <div class="mega-inner">
+
+              <div class="mega-column">
+                <h4>Carteras</h4>
+                <ul>
+                  <li><a href="#">Crossbody</a></li>
+                  <li><a href="#">Tote Bags</a></li>
+                  <li><a href="#">Carteras de hombro</a></li>
+                  <li><a href="#">Mini carteras</a></li>
+                  <li><a href="#">Satchel</a></li>
+                  <li><a href="#">Shoulder Bags</a></li>
+                  <li><a href="#">Mochilas</a></li>
+                  <li><a class="view-all" href="#">Ver todas</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-column">
+                <h4>Comprar por marca</h4>
+                <ul>
+                  <li><a href="#">Guess</a></li>
+                  <li><a href="#">Michael Kors</a></li>
+                  <li><a href="#">Steve Madden</a></li>
+                  <li><a href="#">Tommy Hilfiger</a></li>
+                  <li><a href="#">Calvin Klein</a></li>
+                  <li><a href="#">Prada</a></li>
+                  <li><a href="#">BB</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-visuals">
+                <a class="mega-card" href="#"><span class="mega-card-title">Tote Bags</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Crossbody</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Billeteras</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Shoulder Bags</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== CALZADO ===================== -->
+        <div class="nav-item has-mega">
+          <button class="nav-trigger" type="button">CALZADO</button>
+
+          <div class="mega-menu">
+            <div class="mega-inner">
+
+              <div class="mega-column">
+                <h4>Mujer</h4>
+                <ul>
+                  <li><a href="#">Zapatillas</a></li>
+                  <li><a href="#">Sandalias</a></li>
+                  <li><a href="#">Zapatos</a></li>
+                  <li><a href="#">Botas y botines</a></li>
+                  <li><a class="view-all" href="#">Ver todo Mujer</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-column">
+                <h4>Hombre</h4>
+                <ul>
+                  <li><a href="#">Zapatillas</a></li>
+                  <li><a href="#">Zapatos</a></li>
+                  <li><a href="#">Botas y botines</a></li>
+                  <li><a class="view-all" href="#">Ver todo Hombre</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-visuals">
+                <a class="mega-card" href="#"><span class="mega-card-title">Zapatillas</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Sandalias</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Botines</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Novedades</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== ACCESORIOS ===================== -->
+        <div class="nav-item has-mega">
+          <button class="nav-trigger" type="button">ACCESORIOS</button>
+
+          <div class="mega-menu">
+            <div class="mega-inner">
+
+              <div class="mega-column">
+                <h4>Para ella</h4>
+                <ul>
+                  <li><a href="#">Billeteras</a></li>
+                  <li><a href="#">Correas</a></li>
+                  <li><a href="#">Lentes</a></li>
+                  <li><a href="#">Llaveros</a></li>
+                  <li><a href="#">Joyas & complementos</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-column">
+                <h4>Para él</h4>
+                <ul>
+                  <li><a href="#">Billeteras</a></li>
+                  <li><a href="#">Correas</a></li>
+                  <li><a href="#">Lentes</a></li>
+                  <li><a href="#">Llaveros</a></li>
+                  <li><a class="view-all" href="#">Ver todos</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-visuals">
+                <a class="mega-card" href="#"><span class="mega-card-title">Billeteras</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Correas</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Lentes</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Regalos</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== MARCAS ===================== -->
+        <div class="nav-item has-mega">
+          <button class="nav-trigger" type="button">MARCAS</button>
+
+          <div class="mega-menu">
+            <div class="mega-inner">
+
+              <div class="mega-column">
+                <h4>Marcas</h4>
+                <ul>
+                  <li><a href="#">Guess</a></li>
+                  <li><a href="#">Michael Kors</a></li>
+                  <li><a href="#">Steve Madden</a></li>
+                  <li><a href="#">Tommy Hilfiger</a></li>
+                  <li><a href="#">Calvin Klein</a></li>
+                  <li><a href="#">Prada</a></li>
+                  <li><a href="#">BB</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-column">
+                <h4>Descubrir</h4>
+                <ul>
+                  <li><a href="#">Nuevas marcas</a></li>
+                  <li><a href="#">Más vendidas</a></li>
+                  <li><a href="#">Colecciones</a></li>
+                  <li><a href="#">Ofertas por marca</a></li>
+                  <li><a class="view-all" href="#">Ver todas las marcas</a></li>
+                </ul>
+              </div>
+
+              <div class="mega-visuals">
+                <a class="mega-card" href="#"><span class="mega-card-title">Guess</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Michael Kors</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Steve Madden</span></a>
+                <a class="mega-card" href="#"><span class="mega-card-title">Tommy Hilfiger</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link sale-link" href="#ofertas">OFERTAS</a>
+        </div>
+
+      </nav>
+
+      <div class="header-actions">
+
+        <button class="icon-btn" type="button" aria-label="Buscar" title="Buscar">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6.6"></circle>
+            <path d="M16 16l4.2 4.2"></path>
+          </svg>
+        </button>
+
+        <button class="icon-btn hide-mobile" type="button" aria-label="Favoritos" title="Favoritos">
+          <svg viewBox="0 0 24 24">
+            <path d="M20.8 4.8c-2-2-5.1-2-7.1 0L12 6.5l-1.7-1.7c-2-2-5.1-2-7.1 0s-2 5.1 0 7.1L12 20.5l8.8-8.6c2-2 2-5.1 0-7.1z"></path>
+          </svg>
+        </button>
+
+        <button class="icon-btn hide-tablet" type="button" aria-label="Mi cuenta" title="Mi cuenta">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="3.3"></circle>
+            <path d="M5.5 20c.6-4 3-6.2 6.5-6.2s5.9 2.2 6.5 6.2"></path>
+          </svg>
+        </button>
+
+        <button class="icon-btn bag-wrap" type="button" aria-label="Carrito" title="Carrito">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 8h14l-1 12H6L5 8z"></path>
+            <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+          </svg>
+          <span class="cart-count">0</span>
+        </button>
+
       </div>
 
-      <div class="nav-item">
-        <span class="nav-label">BILLETERAS</span>
-      </div>
-
-      <div class="nav-item">
-        <span class="nav-label">CORREAS</span>
-      </div>
-
-      <div class="nav-item">
-        <span class="nav-label">ACCESORIOS</span>
-      </div>
-
-      <div class="nav-item">
-        <span class="nav-label">MARCAS</span>
-      </div>
-
-      <div class="nav-item">
-        <span class="nav-label">OFERTAS</span>
-      </div>
-
-    </nav>
-
-    <div class="mobile-nav" id="mobileNav">
-      <a href="#novedades">NOVEDADES</a>
-      <a href="#">CARTERAS</a>
-      <a href="#">BILLETERAS</a>
-      <a href="#">CORREAS</a>
-      <a href="#">ACCESORIOS</a>
-      <a href="#">MARCAS</a>
-      <a href="#">OFERTAS</a>
     </div>
 
   </header>
 
+  <!-- =======================================================
+       HERO / PORTADA
+       Más adelante reemplazaremos el fondo por tu foto real.
+  ======================================================== -->
+
   <section class="hero">
 
     <div class="hero-content">
-
-      <div class="hero-small">
-        NUEVA COLECCIÓN
-      </div>
-
+      <div class="hero-kicker">NUEVA COLECCIÓN</div>
       <h1>AB LUXE</h1>
-
-      <p>
-        Elegancia que te acompaña.
-      </p>
-
-      <a href="#novedades" class="btn">
-        DESCUBRIR COLECCIÓN
-      </a>
-
+      <p>Elegancia que te acompaña.</p>
+      <a class="btn btn-light" href="#novedades">DESCUBRIR COLECCIÓN</a>
     </div>
 
   </section>
 
-  <section class="section" id="novedades">
-
-    <div class="section-title">
-      <h2>Nuevos Ingresos</h2>
-      <p>DESCUBRE LO ÚLTIMO EN AB LUXE</p>
-    </div>
-
-    <div class="products">
-
-      <div class="product">
-        <div class="product-image">
-          <span class="tag">NUEVO</span>
-          <span class="heart">♡</span>
-        </div>
-        <div class="product-info">
-          <div class="brand">GUESS</div>
-          <div class="product-name">Nombre del producto</div>
-          <div class="price">S/ 0.00</div>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="product-image">
-          <span class="tag">NUEVO</span>
-          <span class="heart">♡</span>
-        </div>
-        <div class="product-info">
-          <div class="brand">MICHAEL KORS</div>
-          <div class="product-name">Nombre del producto</div>
-          <div class="price">S/ 0.00</div>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="product-image">
-          <span class="tag">NUEVO</span>
-          <span class="heart">♡</span>
-        </div>
-        <div class="product-info">
-          <div class="brand">STEVE MADDEN</div>
-          <div class="product-name">Nombre del producto</div>
-          <div class="price">S/ 0.00</div>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="product-image">
-          <span class="tag">NUEVO</span>
-          <span class="heart">♡</span>
-        </div>
-        <div class="product-info">
-          <div class="brand">TOMMY HILFIGER</div>
-          <div class="product-name">Nombre del producto</div>
-          <div class="price">S/ 0.00</div>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
+  <!-- =======================================================
+       CATEGORÍAS PRINCIPALES
+  ======================================================== -->
 
   <section class="section">
 
-    <div class="section-title">
-      <h2>Compra por Categoría</h2>
-      <p>ENCUENTRA TU ESTILO</p>
-    </div>
+    <div class="section-inner">
 
-    <div class="categories">
-
-      <div class="category">
-        <div class="category-content">
-          <h3>Carteras</h3>
-          <a href="#">VER COLECCIÓN</a>
-        </div>
+      <div class="section-heading">
+        <h2>Descubre AB LUXE</h2>
+        <p>COMPRA POR CATEGORÍA</p>
       </div>
 
-      <div class="category">
-        <div class="category-content">
-          <h3>Billeteras</h3>
-          <a href="#">VER COLECCIÓN</a>
-        </div>
-      </div>
+      <div class="departments">
 
-      <div class="category">
-        <div class="category-content">
-          <h3>Accesorios</h3>
-          <a href="#">VER COLECCIÓN</a>
-        </div>
+        <article class="department-card">
+          <div class="department-content">
+            <h3>Mujer</h3>
+            <a href="#">VER COLECCIÓN</a>
+          </div>
+        </article>
+
+        <article class="department-card">
+          <div class="department-content">
+            <h3>Hombre</h3>
+            <a href="#">VER COLECCIÓN</a>
+          </div>
+        </article>
+
+        <article class="department-card">
+          <div class="department-content">
+            <h3>Carteras</h3>
+            <a href="#">VER COLECCIÓN</a>
+          </div>
+        </article>
+
+        <article class="department-card">
+          <div class="department-content">
+            <h3>Calzado</h3>
+            <a href="#">VER COLECCIÓN</a>
+          </div>
+        </article>
+
       </div>
 
     </div>
 
   </section>
 
-  <section class="brands">
+  <!-- =======================================================
+       NUEVOS INGRESOS
+  ======================================================== -->
 
-    <div class="section-title">
+  <section class="section" id="novedades">
+
+    <div class="section-inner">
+
+      <div class="section-heading">
+        <h2>Nuevos Ingresos</h2>
+        <p>DESCUBRE LO ÚLTIMO EN AB LUXE</p>
+      </div>
+
+      <div class="products">
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-tag">NUEVO</span>
+            <span class="product-heart">♡</span>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">GUESS</div>
+            <div class="product-name">Nombre del producto</div>
+            <div class="product-price">S/ 0.00</div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-tag">NUEVO</span>
+            <span class="product-heart">♡</span>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">MICHAEL KORS</div>
+            <div class="product-name">Nombre del producto</div>
+            <div class="product-price">S/ 0.00</div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-tag">NUEVO</span>
+            <span class="product-heart">♡</span>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">STEVE MADDEN</div>
+            <div class="product-name">Nombre del producto</div>
+            <div class="product-price">S/ 0.00</div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-tag">NUEVO</span>
+            <span class="product-heart">♡</span>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">TOMMY HILFIGER</div>
+            <div class="product-name">Nombre del producto</div>
+            <div class="product-price">S/ 0.00</div>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       MARCAS
+  ======================================================== -->
+
+  <section class="brands-section">
+
+    <div class="section-heading">
       <h2>Shop by Brand</h2>
       <p>MARCAS SELECCIONADAS</p>
     </div>
 
     <div class="brand-list">
-      <div class="brand-name">GUESS</div>
-      <div class="brand-name">MICHAEL KORS</div>
-      <div class="brand-name">TOMMY HILFIGER</div>
-      <div class="brand-name">CALVIN KLEIN</div>
-      <div class="brand-name">STEVE MADDEN</div>
-      <div class="brand-name">PRADA</div>
-      <div class="brand-name">BB</div>
+      <a class="brand-name" href="#">GUESS</a>
+      <a class="brand-name" href="#">MICHAEL KORS</a>
+      <a class="brand-name" href="#">TOMMY HILFIGER</a>
+      <a class="brand-name" href="#">CALVIN KLEIN</a>
+      <a class="brand-name" href="#">STEVE MADDEN</a>
+      <a class="brand-name" href="#">PRADA</a>
+      <a class="brand-name" href="#">BB</a>
     </div>
 
   </section>
 
-  <section class="luxury-banner">
+  <!-- =======================================================
+       BANNER SECUNDARIO / OFERTAS
+  ======================================================== -->
 
-    <div>
+  <section class="editorial-banner" id="ofertas">
+
+    <div class="editorial-content">
       <h2>Timeless Elegance</h2>
       <p>PIEZAS QUE COMPLEMENTAN TU ESTILO</p>
-      <a class="btn" href="#">
-        EXPLORAR AB LUXE
-      </a>
+      <a class="btn btn-light" href="#">EXPLORAR AB LUXE</a>
     </div>
 
   </section>
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
 
   <footer>
 
@@ -984,41 +1551,42 @@
 
       <div>
         <h3>AB LUXE</h3>
-        <p>Bags · Wallets · Accessories</p>
+        <p>Bags · Wallets · Shoes · Accessories</p>
         <p>
-          Una selección especial de accesorios
-          pensados para complementar tu estilo.
+          Una selección especial de carteras, billeteras,
+          calzado y accesorios para complementar tu estilo.
         </p>
       </div>
 
       <div>
         <h4>COMPRAR</h4>
         <ul>
-          <li>Carteras</li>
-          <li>Billeteras</li>
-          <li>Correas</li>
-          <li>Accesorios</li>
-          <li>Novedades</li>
+          <li><a href="#">Mujer</a></li>
+          <li><a href="#">Hombre</a></li>
+          <li><a href="#">Carteras</a></li>
+          <li><a href="#">Calzado</a></li>
+          <li><a href="#">Accesorios</a></li>
+          <li><a href="#novedades">Novedades</a></li>
         </ul>
       </div>
 
       <div>
         <h4>AYUDA</h4>
         <ul>
-          <li>Envíos</li>
-          <li>Cambios</li>
-          <li>Preguntas frecuentes</li>
-          <li>Contacto</li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Cambios</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="#">Contacto</a></li>
         </ul>
       </div>
 
       <div>
         <h4>SÍGUENOS</h4>
         <ul>
-          <li>Instagram</li>
-          <li>TikTok</li>
-          <li>Facebook</li>
-          <li>WhatsApp</li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">WhatsApp</a></li>
         </ul>
       </div>
 
@@ -1030,16 +1598,117 @@
 
   </footer>
 
-  <a class="whatsapp" href="#" aria-label="WhatsApp">
-    ✆
-  </a>
+  <a class="whatsapp" href="#" aria-label="WhatsApp">✆</a>
+
+  <!-- =======================================================
+       MENÚ MÓVIL
+  ======================================================== -->
+
+  <div class="mobile-drawer" id="mobileDrawer">
+
+    <div class="drawer-panel">
+
+      <div class="drawer-head">
+        <div class="drawer-logo">AB LUXE</div>
+        <button class="drawer-close" id="closeMenu" aria-label="Cerrar menú">×</button>
+      </div>
+
+      <ul class="mobile-nav-list">
+
+        <li><a href="#novedades">NOVEDADES</a></li>
+
+        <li>
+          <details>
+            <summary>MUJER</summary>
+            <div class="mobile-submenu">
+              <a href="#">Carteras</a>
+              <a href="#">Billeteras</a>
+              <a href="#">Correas</a>
+              <a href="#">Lentes</a>
+              <a href="#">Accesorios</a>
+              <a href="#">Calzado mujer</a>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details>
+            <summary>HOMBRE</summary>
+            <div class="mobile-submenu">
+              <a href="#">Billeteras</a>
+              <a href="#">Correas</a>
+              <a href="#">Bolsos</a>
+              <a href="#">Mochilas</a>
+              <a href="#">Lentes</a>
+              <a href="#">Calzado hombre</a>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details>
+            <summary>CARTERAS</summary>
+            <div class="mobile-submenu">
+              <a href="#">Crossbody</a>
+              <a href="#">Tote Bags</a>
+              <a href="#">Carteras de hombro</a>
+              <a href="#">Mini carteras</a>
+              <a href="#">Shoulder Bags</a>
+              <a href="#">Mochilas</a>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details>
+            <summary>CALZADO</summary>
+            <div class="mobile-submenu">
+              <a href="#">Zapatillas</a>
+              <a href="#">Sandalias</a>
+              <a href="#">Zapatos</a>
+              <a href="#">Botas y botines</a>
+            </div>
+          </details>
+        </li>
+
+        <li><a href="#">ACCESORIOS</a></li>
+        <li><a href="#">MARCAS</a></li>
+        <li><a href="#ofertas">OFERTAS</a></li>
+
+      </ul>
+
+    </div>
+
+  </div>
 
   <script>
-    const menuMobile = document.getElementById('menuMobile');
-    const mobileNav = document.getElementById('mobileNav');
+    const openMenu = document.getElementById('openMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileDrawer = document.getElementById('mobileDrawer');
 
-    menuMobile.addEventListener('click', () => {
-      mobileNav.classList.toggle('active');
+    function openMobileMenu(){
+      mobileDrawer.classList.add('active');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeMobileMenu(){
+      mobileDrawer.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    }
+
+    openMenu.addEventListener('click', openMobileMenu);
+    closeMenu.addEventListener('click', closeMobileMenu);
+
+    mobileDrawer.addEventListener('click', (event) => {
+      if(event.target === mobileDrawer){
+        closeMobileMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if(event.key === 'Escape'){
+        closeMobileMenu();
+      }
     });
   </script>
 
