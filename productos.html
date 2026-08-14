@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos | AB LUXE</title>
+  <meta name="description" content="Catálogo AB LUXE: carteras, billeteras, correas, calzado y accesorios por marca y categoría.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    :root{
+      --black:#111;
+      --white:#fff;
+      --cream:#f7f4ef;
+      --champagne:#b89a67;
+      --text:#222;
+      --muted:#757575;
+      --line:#e9e5df;
+      --soft:#f3efe9;
+    }
+
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      color:var(--text);
+      background:#fff;
+      overflow-x:hidden;
+    }
+
+    body.menu-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button,select,input{font:inherit}
+
+    /* TOPBAR */
+    .topbar{
+      background:#111;
+      color:#fff;
+      padding:9px 0;
+      overflow:hidden;
+    }
+
+    .topbar-track{
+      display:flex;
+      align-items:center;
+      width:max-content;
+      white-space:nowrap;
+      animation:marquee 25s linear infinite;
+    }
+
+    .topbar-item{
+      padding:0 28px;
+      font-size:9px;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+    }
+
+    .sep{opacity:.45;margin-left:28px}
+
+    @keyframes marquee{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+
+    /* HEADER */
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+    }
+
+    .header-inner{
+      min-height:80px;
+      max-width:1700px;
+      margin:auto;
+      padding:0 4%;
+      display:grid;
+      grid-template-columns:250px 1fr 210px;
+      align-items:center;
+      gap:20px;
+    }
+
+    .logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:38px;
+      font-weight:600;
+      letter-spacing:6px;
+      white-space:nowrap;
+    }
+
+    .logo span{color:var(--champagne)}
+
+    .desktop-nav{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:29px;
+    }
+
+    .desktop-nav a{
+      font-size:10px;
+      font-weight:500;
+      letter-spacing:1px;
+      padding:32px 0;
+      position:relative;
+      white-space:nowrap;
+    }
+
+    .desktop-nav a::after{
+      content:"";
+      position:absolute;
+      bottom:0;
+      left:50%;
+      width:0;
+      height:1px;
+      background:#111;
+      transition:.25s;
+    }
+
+    .desktop-nav a:hover::after,
+    .desktop-nav a.active::after{
+      left:0;
+      width:100%;
+    }
+
+    .desktop-nav .sale{color:#a11212}
+
+    .header-actions{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:14px;
+    }
+
+    .icon-btn{
+      width:34px;height:34px;
+      border:0;background:transparent;
+      display:grid;place-items:center;
+      cursor:pointer;
+    }
+
+    .icon-btn svg{
+      width:20px;height:20px;
+      stroke:#111;fill:none;stroke-width:1.6;
+    }
+
+    .bag-wrap{position:relative}
+    .cart-count{
+      position:absolute;right:-2px;top:-2px;
+      min-width:16px;height:16px;padding:0 4px;
+      border-radius:20px;background:#111;color:#fff;
+      font-size:8px;display:grid;place-items:center;
+    }
+
+    .mobile-menu-btn{
+      display:none;
+      width:36px;height:36px;
+      border:0;background:transparent;
+      font-size:22px;cursor:pointer;
+    }
+
+    /* PAGE HERO */
+    .catalog-hero{
+      padding:58px 5% 40px;
+      background:linear-gradient(135deg,#faf8f5,#f0e9df);
+      text-align:center;
+    }
+
+    .catalog-hero .eyebrow{
+      font-size:9px;
+      letter-spacing:2.5px;
+      color:#777;
+      margin-bottom:10px;
+    }
+
+    .catalog-hero h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:52px;
+      font-weight:500;
+      line-height:1.05;
+    }
+
+    .catalog-hero p{
+      max-width:650px;
+      margin:12px auto 0;
+      color:#777;
+      font-size:11px;
+      line-height:1.7;
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb{
+      max-width:1550px;
+      margin:0 auto;
+      padding:20px 5%;
+      font-size:9px;
+      color:#777;
+      letter-spacing:.4px;
+    }
+
+    .breadcrumb a:hover{color:#111}
+
+    /* CATALOG */
+    .catalog-shell{
+      max-width:1550px;
+      margin:0 auto;
+      padding:0 5% 90px;
+      display:grid;
+      grid-template-columns:245px minmax(0,1fr);
+      gap:38px;
+    }
+
+    .sidebar{
+      border-right:1px solid var(--line);
+      padding-right:28px;
+    }
+
+    .filter-group{
+      padding:0 0 28px;
+      margin-bottom:28px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .filter-group:last-child{border-bottom:0}
+
+    .filter-group h3{
+      font-size:10px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      margin-bottom:15px;
+    }
+
+    .filter-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:11px;
+    }
+
+    .filter-list a{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      font-size:11px;
+      color:#444;
+      transition:.2s;
+    }
+
+    .filter-list a:hover,
+    .filter-list a.active{
+      color:var(--champagne);
+      font-weight:500;
+    }
+
+    .filter-count{
+      color:#aaa;
+      font-size:9px;
+    }
+
+    .catalog-main{min-width:0}
+
+    .toolbar{
+      min-height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      padding-bottom:18px;
+      margin-bottom:22px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .result-info{
+      font-size:10px;
+      letter-spacing:.6px;
+      color:#666;
+    }
+
+    .result-info strong{color:#111}
+
+    .toolbar-right{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .filter-mobile-btn{
+      display:none;
+      border:1px solid #111;
+      background:#fff;
+      padding:11px 16px;
+      font-size:9px;
+      letter-spacing:1px;
+      cursor:pointer;
+    }
+
+    .sort-select{
+      border:1px solid var(--line);
+      background:#fff;
+      padding:11px 34px 11px 12px;
+      font-size:9px;
+      outline:none;
+    }
+
+    .chips{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+
+    .chip{
+      border:1px solid #d9d4cd;
+      padding:8px 11px;
+      font-size:9px;
+      letter-spacing:.4px;
+      background:#fff;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .chip button{
+      border:0;background:transparent;cursor:pointer;
+      line-height:1;font-size:13px;
+    }
+
+    .clear-all{
+      border:0;background:transparent;
+      font-size:9px;text-decoration:underline;
+      cursor:pointer;color:#777;padding:8px;
+    }
+
+    .products-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:30px 20px;
+    }
+
+    .product-card{min-width:0}
+
+    .product-image{
+      aspect-ratio:4/5;
+      position:relative;
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.25),rgba(0,0,0,.03)),
+        #f1eee9;
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      color:#999;
+      font-size:9px;
+      letter-spacing:1.4px;
+    }
+
+    .product-image::before{content:"FOTO DEL PRODUCTO"}
+
+    .tag{
+      position:absolute;
+      left:11px;top:11px;
+      background:#111;color:#fff;
+      padding:6px 9px;
+      font-size:7px;letter-spacing:1px;
+    }
+
+    .heart{
+      position:absolute;
+      right:11px;top:11px;
+      width:31px;height:31px;
+      border:0;border-radius:50%;
+      background:rgba(255,255,255,.95);
+      font-size:18px;cursor:pointer;
+    }
+
+    .product-info{
+      padding:15px 3px 0;
+      text-align:center;
+    }
+
+    .product-brand{
+      font-size:8px;
+      letter-spacing:1.6px;
+      color:#777;
+      text-transform:uppercase;
+    }
+
+    .product-name{
+      font-family:'Cormorant Garamond',serif;
+      font-size:19px;
+      margin:7px 0;
+    }
+
+    .product-meta{
+      color:#777;
+      font-size:9px;
+      margin-bottom:7px;
+    }
+
+    .price{
+      font-size:11px;
+      font-weight:500;
+    }
+
+    .empty{
+      grid-column:1/-1;
+      min-height:350px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:#faf8f5;
+      padding:30px;
+    }
+
+    .empty h3{
+      font-family:'Cormorant Garamond',serif;
+      font-size:32px;
+      font-weight:500;
+    }
+
+    .empty p{
+      font-size:10px;
+      color:#777;
+      margin:10px 0 20px;
+      line-height:1.6;
+    }
+
+    .black-btn{
+      display:inline-flex;
+      min-height:46px;
+      align-items:center;
+      justify-content:center;
+      background:#111;color:#fff;
+      padding:0 24px;
+      font-size:9px;
+      letter-spacing:1.2px;
+    }
+
+    /* MOBILE DRAWER */
+    .mobile-drawer,
+    .filter-drawer{
+      position:fixed;
+      inset:0;
+      z-index:3000;
+      background:rgba(0,0,0,.35);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:.25s;
+    }
+
+    .mobile-drawer.active,
+    .filter-drawer.active{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+
+    .drawer-panel,
+    .filter-panel{
+      width:min(88vw,390px);
+      height:100%;
+      background:#fff;
+      padding:22px;
+      overflow:auto;
+      transform:translateX(-100%);
+      transition:.25s;
+    }
+
+    .filter-panel{
+      margin-left:auto;
+      transform:translateX(100%);
+    }
+
+    .mobile-drawer.active .drawer-panel,
+    .filter-drawer.active .filter-panel{
+      transform:translateX(0);
+    }
+
+    .drawer-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding-bottom:17px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .drawer-head strong{
+      font-family:'Cormorant Garamond',serif;
+      font-size:27px;
+      letter-spacing:3px;
+    }
+
+    .close-btn{
+      border:0;background:transparent;
+      font-size:26px;cursor:pointer;
+    }
+
+    .mobile-menu-list{list-style:none;padding-top:10px}
+    .mobile-menu-list a{
+      display:block;
+      padding:15px 0;
+      border-bottom:1px solid var(--line);
+      font-size:10px;
+      letter-spacing:1px;
+    }
+
+    .mobile-filter-group{
+      padding:22px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .mobile-filter-group h4{
+      font-size:10px;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+
+    .mobile-filter-group a{
+      display:block;
+      padding:7px 0;
+      font-size:11px;
+      color:#555;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#111;color:#fff;
+      padding:60px 6% 28px;
+    }
+
+    .footer-grid{
+      max-width:1450px;margin:auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:45px;
+    }
+
+    footer h3{
+      font-family:'Cormorant Garamond',serif;
+      font-size:32px;letter-spacing:4px;margin-bottom:8px;
+    }
+
+    footer h4{font-size:10px;letter-spacing:1.3px;margin-bottom:16px}
+    footer p,footer li,footer a{list-style:none;color:#aaa;font-size:10px;line-height:2}
+    footer a:hover{color:#fff}
+
+    .copyright{
+      max-width:1450px;margin:40px auto 0;
+      border-top:1px solid #2c2c2c;padding-top:20px;
+      text-align:center;color:#777;font-size:9px;
+    }
+
+    .whatsapp{
+      position:fixed;right:22px;bottom:22px;z-index:1500;
+      width:55px;height:55px;border-radius:50%;
+      background:#111;color:#fff;display:grid;place-items:center;
+      box-shadow:0 8px 22px rgba(0,0,0,.22);
+      font-size:21px;
+    }
+
+    @media(max-width:1100px){
+      .header-inner{grid-template-columns:200px 1fr 165px;padding:0 3%}
+      .desktop-nav{gap:17px}
+      .desktop-nav a{font-size:9px}
+      .products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+
+    @media(max-width:900px){
+      .header-inner{grid-template-columns:44px 1fr 115px;min-height:70px;padding:0 14px}
+      .mobile-menu-btn{display:grid;place-items:center}
+      .desktop-nav{display:none}
+      .logo{justify-self:center;font-size:30px}
+      .header-actions{gap:2px}
+      .header-actions .desktop-only{display:none}
+
+      .catalog-hero{padding:45px 20px 32px}
+      .catalog-hero h1{font-size:43px}
+
+      .catalog-shell{
+        display:block;
+        padding:0 18px 70px;
+      }
+
+      .sidebar{display:none}
+
+      .filter-mobile-btn{display:inline-flex}
+
+      .products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}
+
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:520px){
+      .topbar-item{font-size:8px;padding:0 18px}
+      .sep{margin-left:18px}
+      .logo{font-size:27px;letter-spacing:3px}
+      .header-inner{grid-template-columns:38px 1fr 100px}
+      .icon-btn{width:31px}
+      .header-actions .hide-mobile{display:none}
+
+      .catalog-hero h1{font-size:37px}
+      .catalog-hero p{font-size:10px}
+
+      .breadcrumb{padding:17px 18px}
+      .toolbar{align-items:flex-start;flex-direction:column}
+      .toolbar-right{width:100%;justify-content:space-between}
+      .sort-select{flex:1}
+
+      .product-name{font-size:17px}
+      .product-info{padding-top:12px}
+
+      .footer-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-track">
+      <span class="topbar-item">ENVÍOS A TODO EL PERÚ <span class="sep">•</span></span>
+      <span class="topbar-item">NOVEDADES SEMANALES <span class="sep">•</span></span>
+      <span class="topbar-item">COMPRA SEGURA <span class="sep">•</span></span>
+      <span class="topbar-item">ATENCIÓN POR WHATSAPP 900 377 606 <span class="sep">•</span></span>
+      <span class="topbar-item">AB LUXE | ACCESORIOS CON ESTILO <span class="sep">•</span></span>
+      <span class="topbar-item">ENVÍOS A TODO EL PERÚ <span class="sep">•</span></span>
+      <span class="topbar-item">NOVEDADES SEMANALES <span class="sep">•</span></span>
+      <span class="topbar-item">COMPRA SEGURA <span class="sep">•</span></span>
+      <span class="topbar-item">ATENCIÓN POR WHATSAPP 900 377 606 <span class="sep">•</span></span>
+      <span class="topbar-item">AB LUXE | ACCESORIOS CON ESTILO <span class="sep">•</span></span>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-inner">
+
+      <button class="mobile-menu-btn" id="openMenu" aria-label="Abrir menú">☰</button>
+
+      <a class="logo" href="index.html">AB <span>LUXE</span></a>
+
+      <nav class="desktop-nav">
+        <a href="productos.html?novedad=1">NOVEDADES</a>
+        <a href="productos.html?genero=mujer">MUJER</a>
+        <a href="productos.html?genero=hombre">HOMBRE</a>
+        <a href="productos.html?categoria=carteras" class="active">CARTERAS</a>
+        <a href="productos.html?categoria=calzado">CALZADO</a>
+        <a href="productos.html?categoria=accesorios">ACCESORIOS</a>
+        <a href="productos.html">MARCAS</a>
+        <a class="sale" href="productos.html?oferta=1">OFERTAS</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn desktop-only" aria-label="Buscar">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.6"></circle><path d="M16 16l4.2 4.2"></path></svg>
+        </button>
+        <button class="icon-btn hide-mobile" aria-label="Favoritos">
+          <svg viewBox="0 0 24 24"><path d="M20.8 4.8c-2-2-5.1-2-7.1 0L12 6.5l-1.7-1.7c-2-2-5.1-2-7.1 0s-2 5.1 0 7.1L12 20.5l8.8-8.6c2-2 2-5.1 0-7.1z"></path></svg>
+        </button>
+        <button class="icon-btn desktop-only" aria-label="Cuenta">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.3"></circle><path d="M5.5 20c.6-4 3-6.2 6.5-6.2s5.9 2.2 6.5 6.2"></path></svg>
+        </button>
+        <button class="icon-btn bag-wrap" aria-label="Carrito">
+          <svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="catalog-hero">
+    <div class="eyebrow">AB LUXE · CATÁLOGO</div>
+    <h1 id="pageTitle">Todos los productos</h1>
+    <p id="pageDescription">
+      Descubre nuestra selección de carteras, billeteras, correas, calzado y accesorios.
+    </p>
+  </section>
+
+  <div class="breadcrumb">
+    <a href="index.html">Inicio</a> &nbsp;/&nbsp; <span id="breadcrumbCurrent">Productos</span>
+  </div>
+
+  <main class="catalog-shell">
+
+    <aside class="sidebar">
+
+      <div class="filter-group">
+        <h3>Comprar por marca</h3>
+        <ul class="filter-list" id="desktopBrandFilters"></ul>
+      </div>
+
+      <div class="filter-group">
+        <h3>Categoría</h3>
+        <ul class="filter-list" id="desktopCategoryFilters"></ul>
+      </div>
+
+      <div class="filter-group">
+        <h3>Otros</h3>
+        <ul class="filter-list">
+          <li><a href="productos.html?novedad=1">Nuevos ingresos</a></li>
+          <li><a href="productos.html?oferta=1">Ofertas</a></li>
+          <li><a href="productos.html">Ver todo</a></li>
+        </ul>
+      </div>
+
+    </aside>
+
+    <section class="catalog-main">
+
+      <div class="toolbar">
+        <div class="result-info">
+          <strong id="resultCount">0</strong> productos encontrados
+        </div>
+
+        <div class="toolbar-right">
+          <button class="filter-mobile-btn" id="openFilters">FILTROS</button>
+          <select class="sort-select" id="sortSelect" aria-label="Ordenar productos">
+            <option value="recommended">Orden recomendado</option>
+            <option value="brand">Marca A-Z</option>
+            <option value="category">Categoría</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="chips" id="activeChips"></div>
+
+      <div class="products-grid" id="productsGrid"></div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>AB LUXE</h3>
+        <p>Bags · Wallets · Shoes · Accessories</p>
+        <p>Una selección especial de accesorios para complementar tu estilo.</p>
+        <p>WhatsApp: <a href="https://wa.me/51900377606" target="_blank">900 377 606</a></p>
+      </div>
+      <div>
+        <h4>COMPRAR</h4>
+        <ul>
+          <li><a href="productos.html?genero=mujer">Mujer</a></li>
+          <li><a href="productos.html?genero=hombre">Hombre</a></li>
+          <li><a href="productos.html?categoria=carteras">Carteras</a></li>
+          <li><a href="productos.html?categoria=calzado">Calzado</a></li>
+          <li><a href="productos.html?categoria=accesorios">Accesorios</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>MARCAS</h4>
+        <ul>
+          <li><a href="productos.html?marca=guess">Guess</a></li>
+          <li><a href="productos.html?marca=michael-kors">Michael Kors</a></li>
+          <li><a href="productos.html?marca=tommy-hilfiger">Tommy Hilfiger</a></li>
+          <li><a href="productos.html?marca=steve-madden">Steve Madden</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>AYUDA</h4>
+        <ul>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Cambios</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="https://wa.me/51900377606" target="_blank">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">© 2026 AB LUXE · TODOS LOS DERECHOS RESERVADOS</div>
+  </footer>
+
+  <a class="whatsapp" href="https://wa.me/51900377606?text=Hola%20AB%20LUXE%2C%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos." target="_blank" aria-label="WhatsApp">✆</a>
+
+  <!-- MENU MOBILE -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-panel">
+      <div class="drawer-head">
+        <strong>AB LUXE</strong>
+        <button class="close-btn" id="closeMenu">×</button>
+      </div>
+      <ul class="mobile-menu-list">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="productos.html?novedad=1">NOVEDADES</a></li>
+        <li><a href="productos.html?genero=mujer">MUJER</a></li>
+        <li><a href="productos.html?genero=hombre">HOMBRE</a></li>
+        <li><a href="productos.html?categoria=carteras">CARTERAS</a></li>
+        <li><a href="productos.html?categoria=calzado">CALZADO</a></li>
+        <li><a href="productos.html?categoria=accesorios">ACCESORIOS</a></li>
+        <li><a href="productos.html">MARCAS</a></li>
+        <li><a href="productos.html?oferta=1">OFERTAS</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FILTROS MOBILE -->
+  <div class="filter-drawer" id="filterDrawer">
+    <div class="filter-panel">
+      <div class="drawer-head">
+        <strong>Filtros</strong>
+        <button class="close-btn" id="closeFilters">×</button>
+      </div>
+
+      <div class="mobile-filter-group">
+        <h4>MARCAS</h4>
+        <div id="mobileBrandFilters"></div>
+      </div>
+
+      <div class="mobile-filter-group">
+        <h4>CATEGORÍAS</h4>
+        <div id="mobileCategoryFilters"></div>
+      </div>
+
+      <div class="mobile-filter-group">
+        <a href="productos.html">LIMPIAR TODOS LOS FILTROS</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const brands = [
+      ["guess","Guess"],
+      ["michael-kors","Michael Kors"],
+      ["steve-madden","Steve Madden"],
+      ["tommy-hilfiger","Tommy Hilfiger"],
+      ["calvin-klein","Calvin Klein"],
+      ["prada","Prada"],
+      ["bb","BB"]
+    ];
+
+    const categories = [
+      ["crossbody","Crossbody"],
+      ["tote-bags","Tote Bags"],
+      ["carteras-hombro","Carteras de hombro"],
+      ["mini-carteras","Mini carteras"],
+      ["satchel","Satchel"],
+      ["shoulder-bags","Shoulder Bags"],
+      ["mochilas","Mochilas"],
+      ["billeteras","Billeteras"],
+      ["correas","Correas"],
+      ["lentes","Lentes"],
+      ["llaveros","Llaveros"]
+    ];
+
+    /*
+      PRODUCTOS DE DEMOSTRACIÓN.
+      Después los reemplazaremos por los productos reales de Supabase.
+    */
+    const products = [
+      {id:"g-01", brand:"guess", brandLabel:"Guess", category:"crossbody", categoryLabel:"Crossbody", gender:"mujer", name:"Crossbody — producto de ejemplo", price:"S/ 0.00", tag:"NUEVO", newItem:true},
+      {id:"g-02", brand:"guess", brandLabel:"Guess", category:"tote-bags", categoryLabel:"Tote Bags", gender:"mujer", name:"Tote Bag — producto de ejemplo", price:"S/ 0.00", tag:"NUEVO", newItem:true},
+      {id:"mk-01", brand:"michael-kors", brandLabel:"Michael Kors", category:"carteras-hombro", categoryLabel:"Cartera de hombro", gender:"mujer", name:"Shoulder Bag — producto de ejemplo", price:"S/ 0.00", tag:"", newItem:false},
+      {id:"mk-02", brand:"michael-kors", brandLabel:"Michael Kors", category:"billeteras", categoryLabel:"Billeteras", gender:"mujer", name:"Billetera — producto de ejemplo", price:"S/ 0.00", tag:"NUEVO", newItem:true},
+      {id:"sm-01", brand:"steve-madden", brandLabel:"Steve Madden", category:"crossbody", categoryLabel:"Crossbody", gender:"mujer", name:"Crossbody — producto de ejemplo", price:"S/ 0.00", tag:"", newItem:false},
+      {id:"sm-02", brand:"steve-madden", brandLabel:"Steve Madden", category:"mini-carteras", categoryLabel:"Mini carteras", gender:"mujer", name:"Mini Bag — producto de ejemplo", price:"S/ 0.00", tag:"OFERTA", newItem:false, offer:true},
+      {id:"th-01", brand:"tommy-hilfiger", brandLabel:"Tommy Hilfiger", category:"tote-bags", categoryLabel:"Tote Bags", gender:"mujer", name:"Tote — producto de ejemplo", price:"S/ 0.00", tag:"NUEVO", newItem:true},
+      {id:"th-02", brand:"tommy-hilfiger", brandLabel:"Tommy Hilfiger", category:"billeteras", categoryLabel:"Billeteras", gender:"hombre", name:"Billetera — producto de ejemplo", price:"S/ 0.00", tag:"", newItem:false},
+      {id:"ck-01", brand:"calvin-klein", brandLabel:"Calvin Klein", category:"correas", categoryLabel:"Correas", gender:"mujer", name:"Correa — producto de ejemplo", price:"S/ 0.00", tag:"", newItem:false},
+      {id:"ck-02", brand:"calvin-klein", brandLabel:"Calvin Klein", category:"billeteras", categoryLabel:"Billeteras", gender:"hombre", name:"Billetera — producto de ejemplo", price:"S/ 0.00", tag:"OFERTA", newItem:false, offer:true},
+      {id:"p-01", brand:"prada", brandLabel:"Prada", category:"shoulder-bags", categoryLabel:"Shoulder Bags", gender:"mujer", name:"Shoulder Bag — producto de ejemplo", price:"S/ 0.00", tag:"", newItem:false},
+      {id:"p-02", brand:"prada", brandLabel:"Prada", category:"lentes", categoryLabel:"Lentes", gender:"mujer", name:"Lentes — producto de ejemplo", price:"S/ 0.00", tag:"NUEVO", newItem:true},
+      {id:"bb-01", brand:"bb", brandLabel:"BB", category:"satchel", categoryLabel:"Satchel", gender:"mujer", name:"Satchel — producto de ejemplo", price:"S/ 0.00", tag:"", newItem:false},
+      {id:"bb-02", brand:"bb", brandLabel:"BB", category:"llaveros", categoryLabel:"Llaveros", gender:"mujer", name:"Accesorio — producto de ejemplo", price:"S/ 0.00", tag:"OFERTA", newItem:false, offer:true}
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const selectedBrand = params.get("marca");
+    const selectedCategory = params.get("categoria");
+    const selectedGender = params.get("genero");
+    const selectedNew = params.get("novedad") === "1";
+    const selectedOffer = params.get("oferta") === "1";
+
+    const brandMap = Object.fromEntries(brands);
+    const categoryMap = Object.fromEntries(categories);
+
+    function buildUrl(changes={}){
+      const next = new URLSearchParams(window.location.search);
+
+      Object.entries(changes).forEach(([key,value]) => {
+        if(value === null || value === "" || value === false){
+          next.delete(key);
+        }else{
+          next.set(key,String(value));
+        }
+      });
+
+      const query = next.toString();
+      return "productos.html" + (query ? "?" + query : "");
+    }
+
+    function renderFilters(){
+      const desktopBrand = document.getElementById("desktopBrandFilters");
+      const mobileBrand = document.getElementById("mobileBrandFilters");
+      const desktopCategory = document.getElementById("desktopCategoryFilters");
+      const mobileCategory = document.getElementById("mobileCategoryFilters");
+
+      desktopBrand.innerHTML = brands.map(([slug,label]) => {
+        const count = products.filter(p => p.brand === slug).length;
+        return `<li><a class="${selectedBrand===slug ? "active" : ""}" href="${buildUrl({marca:slug})}">
+          <span>${label}</span><span class="filter-count">${count}</span>
+        </a></li>`;
+      }).join("");
+
+      mobileBrand.innerHTML = brands.map(([slug,label]) =>
+        `<a href="${buildUrl({marca:slug})}">${label}</a>`
+      ).join("");
+
+      desktopCategory.innerHTML = categories.map(([slug,label]) => {
+        const count = products.filter(p => p.category === slug).length;
+        return `<li><a class="${selectedCategory===slug ? "active" : ""}" href="${buildUrl({categoria:slug})}">
+          <span>${label}</span><span class="filter-count">${count}</span>
+        </a></li>`;
+      }).join("");
+
+      mobileCategory.innerHTML = categories.map(([slug,label]) =>
+        `<a href="${buildUrl({categoria:slug})}">${label}</a>`
+      ).join("");
+    }
+
+    function filteredProducts(){
+      return products.filter(p => {
+        if(selectedBrand && p.brand !== selectedBrand) return false;
+        if(selectedCategory && p.category !== selectedCategory) return false;
+        if(selectedGender && p.gender !== selectedGender) return false;
+        if(selectedNew && !p.newItem) return false;
+        if(selectedOffer && !p.offer) return false;
+        return true;
+      });
+    }
+
+    function pageContext(){
+      if(selectedBrand){
+        return {
+          title: brandMap[selectedBrand] || "Productos",
+          description:`Descubre la selección ${brandMap[selectedBrand] || ""} disponible en AB LUXE.`,
+          breadcrumb:brandMap[selectedBrand] || "Productos"
+        };
+      }
+
+      if(selectedCategory){
+        return {
+          title: categoryMap[selectedCategory] || "Productos",
+          description:`Explora nuestros productos de ${categoryMap[selectedCategory] || "esta categoría"}.`,
+          breadcrumb:categoryMap[selectedCategory] || "Productos"
+        };
+      }
+
+      if(selectedGender === "mujer"){
+        return {title:"Mujer",description:"Carteras, billeteras y accesorios seleccionados para mujer.",breadcrumb:"Mujer"};
+      }
+
+      if(selectedGender === "hombre"){
+        return {title:"Hombre",description:"Billeteras, correas y accesorios seleccionados para hombre.",breadcrumb:"Hombre"};
+      }
+
+      if(selectedNew){
+        return {title:"Nuevos ingresos",description:"Las últimas novedades que llegan a AB LUXE.",breadcrumb:"Novedades"};
+      }
+
+      if(selectedOffer){
+        return {title:"Ofertas",description:"Productos seleccionados y últimas oportunidades.",breadcrumb:"Ofertas"};
+      }
+
+      return {
+        title:"Todos los productos",
+        description:"Descubre nuestra selección de carteras, billeteras, correas y accesorios.",
+        breadcrumb:"Productos"
+      };
+    }
+
+    function renderPageContext(){
+      const ctx = pageContext();
+      document.getElementById("pageTitle").textContent = ctx.title;
+      document.getElementById("pageDescription").textContent = ctx.description;
+      document.getElementById("breadcrumbCurrent").textContent = ctx.breadcrumb;
+      document.title = `${ctx.title} | AB LUXE`;
+    }
+
+    function renderChips(){
+      const container = document.getElementById("activeChips");
+      const chips = [];
+
+      if(selectedBrand){
+        chips.push(["Marca: " + (brandMap[selectedBrand] || selectedBrand), buildUrl({marca:null})]);
+      }
+
+      if(selectedCategory){
+        chips.push(["Categoría: " + (categoryMap[selectedCategory] || selectedCategory), buildUrl({categoria:null})]);
+      }
+
+      if(selectedGender){
+        chips.push(["Género: " + (selectedGender === "mujer" ? "Mujer" : "Hombre"), buildUrl({genero:null})]);
+      }
+
+      if(selectedNew){
+        chips.push(["Novedades", buildUrl({novedad:null})]);
+      }
+
+      if(selectedOffer){
+        chips.push(["Ofertas", buildUrl({oferta:null})]);
+      }
+
+      if(!chips.length){
+        container.innerHTML = "";
+        return;
+      }
+
+      container.innerHTML =
+        chips.map(([label,url]) =>
+          `<span class="chip">${label}<button onclick="location.href='${url}'" aria-label="Quitar filtro">×</button></span>`
+        ).join("") +
+        `<button class="clear-all" onclick="location.href='productos.html'">Limpiar todo</button>`;
+    }
+
+    function renderProducts(){
+      let list = filteredProducts();
+      const sort = document.getElementById("sortSelect").value;
+
+      if(sort === "brand"){
+        list = [...list].sort((a,b)=>a.brandLabel.localeCompare(b.brandLabel));
+      }else if(sort === "category"){
+        list = [...list].sort((a,b)=>a.categoryLabel.localeCompare(b.categoryLabel));
+      }
+
+      document.getElementById("resultCount").textContent = list.length;
+
+      const grid = document.getElementById("productsGrid");
+
+      if(!list.length){
+        grid.innerHTML = `
+          <div class="empty">
+            <h3>No encontramos productos</h3>
+            <p>Prueba quitando alguno de los filtros para ver más opciones.</p>
+            <a class="black-btn" href="productos.html">VER TODOS LOS PRODUCTOS</a>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(p => `
+        <article class="product-card">
+          <div class="product-image">
+            ${p.tag ? `<span class="tag">${p.tag}</span>` : ""}
+            <button class="heart" aria-label="Agregar ${p.name} a favoritos">♡</button>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">${p.brandLabel}</div>
+            <div class="product-name">${p.name}</div>
+            <div class="product-meta">${p.categoryLabel}</div>
+            <div class="price">${p.price}</div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    renderFilters();
+    renderPageContext();
+    renderChips();
+    renderProducts();
+
+    document.getElementById("sortSelect").addEventListener("change", renderProducts);
+
+    /* Mobile menu */
+    const mobileDrawer = document.getElementById("mobileDrawer");
+    const openMenu = document.getElementById("openMenu");
+    const closeMenu = document.getElementById("closeMenu");
+
+    function openMobileMenu(){
+      mobileDrawer.classList.add("active");
+      document.body.classList.add("menu-open");
+    }
+
+    function closeMobileMenu(){
+      mobileDrawer.classList.remove("active");
+      document.body.classList.remove("menu-open");
+    }
+
+    openMenu.addEventListener("click",openMobileMenu);
+    closeMenu.addEventListener("click",closeMobileMenu);
+    mobileDrawer.addEventListener("click",e => {
+      if(e.target === mobileDrawer) closeMobileMenu();
+    });
+
+    /* Mobile filters */
+    const filterDrawer = document.getElementById("filterDrawer");
+    const openFilters = document.getElementById("openFilters");
+    const closeFilters = document.getElementById("closeFilters");
+
+    function openFilterDrawer(){
+      filterDrawer.classList.add("active");
+      document.body.classList.add("menu-open");
+    }
+
+    function closeFilterDrawer(){
+      filterDrawer.classList.remove("active");
+      document.body.classList.remove("menu-open");
+    }
+
+    openFilters.addEventListener("click",openFilterDrawer);
+    closeFilters.addEventListener("click",closeFilterDrawer);
+    filterDrawer.addEventListener("click",e => {
+      if(e.target === filterDrawer) closeFilterDrawer();
+    });
+
+    document.addEventListener("keydown",e => {
+      if(e.key === "Escape"){
+        closeMobileMenu();
+        closeFilterDrawer();
+      }
+    });
+  </script>
+
+</body>
+</html>
