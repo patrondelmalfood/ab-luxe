@@ -67,11 +67,49 @@
     .topbar{
       background:var(--black);
       color:#fff;
-      text-align:center;
+      padding:10px 0;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .topbar-viewport{
+      width:100%;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+
+    .topbar-track{
+      display:flex;
+      width:max-content;
+      align-items:center;
+      white-space:nowrap;
+      animation:topbarMarquee 24s linear infinite;
+      will-change:transform;
+    }
+
+    .topbar-item{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      padding:0 26px;
       font-size:10px;
       letter-spacing:1.8px;
-      padding:10px 15px;
       text-transform:uppercase;
+    }
+
+    .topbar-sep{
+      opacity:.55;
+      margin-left:26px;
+    }
+
+    @keyframes topbarMarquee{
+      0%{
+        transform:translateX(0);
+      }
+      100%{
+        transform:translateX(-50%);
+      }
     }
 
     /* =========================================================
@@ -347,9 +385,12 @@
     }
 
     /* =========================================================
-       HERO / PORTADA PRINCIPAL
-       La imagen debe subirse a GitHub con este nombre exacto:
-       portada-ab-luxe.png
+       HERO / PORTADA PRINCIPAL - SLIDER AUTOMÁTICO
+
+       Sube estas 3 imágenes a GitHub con estos nombres EXACTOS:
+       portada-ab-luxe-1.png
+       portada-ab-luxe-2.png
+       portada-ab-luxe-3.png
     ========================================================= */
 
     .hero{
@@ -360,38 +401,76 @@
       align-items:center;
       justify-content:flex-end;
       padding:60px 8%;
-
-      /* FOTO LIMPIA A PANTALLA COMPLETA */
-      background-image:
-        linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 42%,rgba(0,0,0,.05) 100%),
-        url('portada-ab-luxe.png');
-      background-size:cover;
-      background-position:left center;
-      background-repeat:no-repeat;
+      background:#8f837a;
     }
 
-    /* Sutil sombreado para que el texto siga siendo legible */
-    .hero::after{
-      content:"";
+    .hero-slider{
       position:absolute;
       inset:0;
+      z-index:0;
+      overflow:hidden;
+      background:#8f837a;
+    }
+
+    .hero-slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      visibility:hidden;
+
+      /* La imagen completa conserva la cabeza de la modelo */
+      background-size:auto 100%;
+      background-position:left center;
+      background-repeat:no-repeat;
+      background-color:#8f837a;
+
+      transform:scale(1.015);
+      transition:
+        opacity 1.1s ease,
+        visibility 1.1s ease,
+        transform 7s ease;
+    }
+
+    .hero-slide.active{
+      opacity:1;
+      visibility:visible;
+      transform:scale(1);
+    }
+
+    .hero-slide-1{
+      background-image:url('portada-ab-luxe-1.png');
+    }
+
+    .hero-slide-2{
+      background-image:url('portada-ab-luxe-2.png');
+    }
+
+    .hero-slide-3{
+      background-image:url('portada-ab-luxe-3.png');
+    }
+
+    /* Sombreado suave en la parte derecha para mantener legible el texto */
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      z-index:1;
       background:linear-gradient(
         90deg,
         rgba(0,0,0,0) 0%,
-        rgba(0,0,0,0) 45%,
-        rgba(0,0,0,.06) 70%,
-        rgba(0,0,0,.12) 100%
+        rgba(0,0,0,0) 43%,
+        rgba(0,0,0,.05) 66%,
+        rgba(0,0,0,.14) 100%
       );
       pointer-events:none;
     }
 
     .hero-content{
       position:relative;
-      z-index:2;
+      z-index:3;
       width:min(620px,48%);
       text-align:center;
       color:#fff;
-      text-shadow:0 2px 18px rgba(0,0,0,.18);
+      text-shadow:0 2px 18px rgba(0,0,0,.20);
     }
 
     .hero-kicker{
@@ -412,6 +491,41 @@
       margin:22px 0 30px;
       font-family:'Cormorant Garamond',serif;
       font-size:25px;
+    }
+
+    .hero-dots{
+      position:absolute;
+      left:50%;
+      bottom:18px;
+      z-index:4;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+    }
+
+    .hero-dot{
+      width:8px;
+      height:8px;
+      padding:0;
+      border:1px solid rgba(255,255,255,.95);
+      border-radius:50%;
+      background:transparent;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .hero-dot.active{
+      background:#fff;
+      transform:scale(1.2);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .hero-slide{
+        transition:opacity .25s ease;
+        transform:none;
+      }
     }
 
     .btn{
@@ -850,6 +964,26 @@
       list-style:none;
     }
 
+    .mobile-nav-list summary{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .mobile-nav-list summary::after{
+      content:"+";
+      font-size:18px;
+      font-weight:300;
+      line-height:1;
+      color:#777;
+    }
+
+    .mobile-nav-list details[open] > summary::after{
+      content:"−";
+      color:#111;
+    }
+
     .mobile-nav-list summary::-webkit-details-marker{
       display:none;
     }
@@ -926,15 +1060,19 @@
         min-height:610px;
         justify-content:flex-end;
         padding:55px 5%;
-        background-position:30% center;
       }
 
-      .hero::after{
+      .hero-slide{
+        background-size:auto 100%;
+        background-position:left center;
+      }
+
+      .hero-overlay{
         background:linear-gradient(
           90deg,
           rgba(0,0,0,0) 0%,
           rgba(0,0,0,.02) 35%,
-          rgba(0,0,0,.25) 100%
+          rgba(0,0,0,.26) 100%
         );
       }
 
@@ -966,8 +1104,17 @@
 
     @media(max-width:560px){
       .topbar{
+        padding:8px 0;
+      }
+
+      .topbar-item{
         font-size:8px;
         letter-spacing:1.2px;
+        padding:0 18px;
+      }
+
+      .topbar-sep{
+        margin-left:18px;
       }
 
       .header-inner{
@@ -993,25 +1140,35 @@
       }
 
       .hero{
-        min-height:590px;
+        min-height:620px;
         align-items:flex-end;
         justify-content:center;
-        padding:40px 20px 48px;
-        background-position:30% center;
+        padding:40px 20px 56px;
+        background:#8f837a;
       }
 
-      .hero::after{
+      /* En celular mostramos más área vertical para cuidar cabeza y cuerpo. */
+      .hero-slide{
+        background-size:auto 74%;
+        background-position:center top;
+      }
+
+      .hero-overlay{
         background:linear-gradient(
           to bottom,
-          rgba(0,0,0,0) 35%,
-          rgba(0,0,0,.08) 55%,
-          rgba(0,0,0,.50) 100%
+          rgba(0,0,0,0) 30%,
+          rgba(0,0,0,.08) 50%,
+          rgba(0,0,0,.56) 100%
         );
       }
 
       .hero-content{
         width:100%;
         margin-top:0;
+      }
+
+      .hero-dots{
+        bottom:18px;
       }
 
       .hero h1{
@@ -1076,7 +1233,22 @@
 <body>
 
   <div class="topbar">
-    ENVÍOS A TODO EL PERÚ · NOVEDADES SEMANALES · COMPRA SEGURA
+    <div class="topbar-viewport">
+      <div class="topbar-track">
+        <span class="topbar-item">ENVÍOS A TODO EL PERÚ <span class="topbar-sep">•</span></span>
+        <span class="topbar-item">NOVEDADES SEMANALES <span class="topbar-sep">•</span></span>
+        <span class="topbar-item">COMPRA SEGURA <span class="topbar-sep">•</span></span>
+        <span class="topbar-item">ATENCIÓN POR WHATSAPP 900 377 606 <span class="topbar-sep">•</span></span>
+        <span class="topbar-item">AB LUXE | ACCESORIOS CON ESTILO <span class="topbar-sep">•</span></span>
+
+        <!-- Duplicado para que el movimiento sea continuo -->
+        <span class="topbar-item">ENVÍOS A TODO EL PERÚ <span class="topbar-sep">•</span></span>
+        <span class="topbar-item">NOVEDADES SEMANALES <span class="topbar-sep">•</span></span>
+        <span class="topbar-item">COMPRA SEGURA <span class="topbar-sep">•</span></span>
+        <span class="topbar-item">ATENCIÓN POR WHATSAPP 900 377 606 <span class="topbar-sep">•</span></span>
+        <span class="topbar-item">AB LUXE | ACCESORIOS CON ESTILO <span class="topbar-sep">•</span></span>
+      </div>
+    </div>
   </div>
 
   <header class="site-header">
@@ -1390,16 +1562,30 @@
 
   <!-- =======================================================
        HERO / PORTADA
-       Más adelante reemplazaremos el fondo por tu foto real.
+       Slider automático con 3 fotografías.
   ======================================================== -->
 
   <section class="hero">
+
+    <div class="hero-slider" aria-hidden="true">
+      <div class="hero-slide hero-slide-1 active"></div>
+      <div class="hero-slide hero-slide-2"></div>
+      <div class="hero-slide hero-slide-3"></div>
+    </div>
+
+    <div class="hero-overlay"></div>
 
     <div class="hero-content">
       <div class="hero-kicker">NUEVA COLECCIÓN</div>
       <h1>AB LUXE</h1>
       <p>Elegancia que te acompaña.</p>
       <a class="btn btn-light" href="#novedades">DESCUBRIR COLECCIÓN</a>
+    </div>
+
+    <div class="hero-dots" aria-label="Cambiar imagen de portada">
+      <button class="hero-dot active" type="button" data-slide="0" aria-label="Portada 1"></button>
+      <button class="hero-dot" type="button" data-slide="1" aria-label="Portada 2"></button>
+      <button class="hero-dot" type="button" data-slide="2" aria-label="Portada 3"></button>
     </div>
 
   </section>
@@ -1574,6 +1760,10 @@
           Una selección especial de carteras, billeteras,
           calzado y accesorios para complementar tu estilo.
         </p>
+        <p>
+          WhatsApp:
+          <a href="https://wa.me/51900377606?text=Hola%20AB%20LUXE%2C%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos." target="_blank" rel="noopener noreferrer">900 377 606</a>
+        </p>
       </div>
 
       <div>
@@ -1604,7 +1794,7 @@
           <li><a href="#">Instagram</a></li>
           <li><a href="#">TikTok</a></li>
           <li><a href="#">Facebook</a></li>
-          <li><a href="#">WhatsApp</a></li>
+          <li><a href="https://wa.me/51900377606?text=Hola%20AB%20LUXE%2C%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos." target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
         </ul>
       </div>
 
@@ -1616,7 +1806,12 @@
 
   </footer>
 
-  <a class="whatsapp" href="#" aria-label="WhatsApp">✆</a>
+  <a class="whatsapp"
+     href="https://wa.me/51900377606?text=Hola%20AB%20LUXE%2C%20quisiera%20informaci%C3%B3n%20sobre%20sus%20productos."
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Escríbenos por WhatsApp al 900 377 606"
+     title="WhatsApp: 900 377 606">✆</a>
 
   <!-- =======================================================
        MENÚ MÓVIL
@@ -1689,9 +1884,48 @@
           </details>
         </li>
 
-        <li><a href="#">ACCESORIOS</a></li>
-        <li><a href="#">MARCAS</a></li>
-        <li><a href="#ofertas">OFERTAS</a></li>
+        <li>
+          <details>
+            <summary>ACCESORIOS</summary>
+            <div class="mobile-submenu">
+              <a href="#">Billeteras</a>
+              <a href="#">Correas</a>
+              <a href="#">Lentes</a>
+              <a href="#">Llaveros</a>
+              <a href="#">Accesorios para mujer</a>
+              <a href="#">Accesorios para hombre</a>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details>
+            <summary>MARCAS</summary>
+            <div class="mobile-submenu">
+              <a href="#">Guess</a>
+              <a href="#">Michael Kors</a>
+              <a href="#">Steve Madden</a>
+              <a href="#">Tommy Hilfiger</a>
+              <a href="#">Calvin Klein</a>
+              <a href="#">Prada</a>
+              <a href="#">BB</a>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details>
+            <summary>OFERTAS</summary>
+            <div class="mobile-submenu">
+              <a href="#ofertas">Ver todas las ofertas</a>
+              <a href="#">Ofertas Mujer</a>
+              <a href="#">Ofertas Hombre</a>
+              <a href="#">Carteras en oferta</a>
+              <a href="#">Calzado en oferta</a>
+              <a href="#">Últimas unidades</a>
+            </div>
+          </details>
+        </li>
 
       </ul>
 
@@ -1728,6 +1962,66 @@
         closeMobileMenu();
       }
     });
+
+    /* =====================================================
+       MENÚ MÓVIL TIPO ACORDEÓN
+       Al abrir una categoría, cerramos las demás.
+    ====================================================== */
+    const mobileDetails = document.querySelectorAll('.mobile-nav-list details');
+
+    mobileDetails.forEach((detail) => {
+      detail.addEventListener('toggle', () => {
+        if(!detail.open) return;
+
+        mobileDetails.forEach((otherDetail) => {
+          if(otherDetail !== detail){
+            otherDetail.removeAttribute('open');
+          }
+        });
+      });
+    });
+
+    /* =====================================================
+       PORTADA AUTOMÁTICA DE 3 IMÁGENES
+       Cambia cada 5 segundos con transición suave.
+    ====================================================== */
+    const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+    const heroDots = Array.from(document.querySelectorAll('.hero-dot'));
+
+    let currentHeroSlide = 0;
+    let heroTimer = null;
+
+    function showHeroSlide(index){
+      if(!heroSlides.length) return;
+
+      currentHeroSlide = (index + heroSlides.length) % heroSlides.length;
+
+      heroSlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentHeroSlide);
+      });
+
+      heroDots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentHeroSlide);
+      });
+    }
+
+    function startHeroSlider(){
+      clearInterval(heroTimer);
+
+      heroTimer = setInterval(() => {
+        showHeroSlide(currentHeroSlide + 1);
+      }, 5000);
+    }
+
+    heroDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        showHeroSlide(Number(dot.dataset.slide));
+        startHeroSlider();
+      });
+    });
+
+    showHeroSlide(0);
+    startHeroSlider();
   </script>
 
 </body>
